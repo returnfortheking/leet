@@ -1,6 +1,9 @@
 # 国内大厂算法面试刷题路线（Python）
 
-针对字节 / 阿里 / 腾讯 / 美团 / 快手 / 京东等国内大厂面试。专题划分参考 labuladong 算法体系；目标量级 **250–300 题**。
+针对字节 / 阿里 / 腾讯 / 美团 / 快手 / 京东等国内大厂面试。专题分类参考 labuladong 体系，题目优先 LeetCode Hot 100。
+
+**题量**：~168 题 = 🔥 100 Hot 100（主刷，在 16 个专题目录里） + 📚 68 labuladong 扩展（二刷，在 [`_labuladong_ext/`](_labuladong_ext/)）。
+**一刷只刷 Hot 100**，扩展放着等以后回头加深。
 
 ---
 
@@ -52,8 +55,10 @@
 ## 顶层索引
 
 - [PYTHON_CHEATSHEET.md](PYTHON_CHEATSHEET.md) — TS 程序员的 Python 速查（强烈建议刷题前过一遍）
-- [HIGH_FREQ.md](HIGH_FREQ.md) — 国内大厂高频题清单（按专题）
+- [HIGH_FREQ.md](HIGH_FREQ.md) — 高频题清单（Hot 100 主刷 + labuladong 扩展）
 - [_template/](_template/README.md) — 题解模板与使用说明
+- [_review/](_review/README.md) — 开发踩坑复盘（持续累积）
+- [_labuladong_ext/](_labuladong_ext/) — labuladong 扩展题（二刷再说，一刷别动）
 
 ---
 
@@ -63,13 +68,15 @@
 leetcode/
 ├── README.md                # 本文件
 ├── PYTHON_CHEATSHEET.md     # TS → Python 速查
-├── HIGH_FREQ.md             # 高频题清单
+├── HIGH_FREQ.md             # 高频题清单（含两区索引）
 ├── _template/               # 题解模板
-│   ├── solution_template.py
-│   └── README.md
-├── 01_array_string/
-│   ├── NOTES.md             # 专题学习笔记（套路+模板）
-│   └── XXXX_*.py            # 题目文件
+├── _review/                 # 踩坑复盘（按主题 + 按题）
+├── _labuladong_ext/         # 📚 labuladong 扩展题（二刷再说）
+│   ├── 01_array_string/
+│   └── ... 同样 16 专题分类
+├── 01_array_string/         # 🔥 Hot 100 主刷
+│   ├── NOTES.md             # 专题学习笔记（套路 + 模板）
+│   └── XXXX_*.py            # Hot 100 题目文件
 ├── 02_linked_list/ ...
 └── 16_design/ ...
 ```
