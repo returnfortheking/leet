@@ -31,3 +31,6 @@ desktop.ini
 scratch/
 tmp/
 *.local.py
+
+# pick.py 进度缓存（每台机器独立；想跨机同步进度就把这行删了）
+.pick_state.json

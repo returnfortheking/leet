@@ -1,44 +1,68 @@
 #!/usr/bin/env python3
 """
-随机抽题（盲选，避免预先知道专题/套路）。
+随机抽题 + 完成度跟踪。
 
-用法
-----
-    python pick.py                  随机 1 道未做的 Hot 100
-    python pick.py 5                随机 5 道未做的 Hot 100
-    python pick.py star             仅 ★ 题，未做
-    python pick.py --done           已做的 Hot 100（用于复盘）
-    python pick.py --any            未做+已做都行（默认是仅未做）
-    python pick.py --all            池子改成全部 169 题（含 _labuladong_ext/）
-    python pick.py --all --any 3    3 道随机，全池子，全状态
-    python pick.py --status         只看进度统计，不抽题
+抽题用法
+--------
+    python pick.py                  随机 1 道未做 Hot 100（untouched + wip）
+    python pick.py 5                5 道
+    python pick.py star             仅 ★，未做
+    python pick.py star 3           仅 ★，3 道，未做
 
-参数可任意组合，比如 `python pick.py --all star --done 3` =
-    全池子里随机 3 道已做的 ★ 题。
+    python pick.py --untouched      仅"原版模板没动过"
+    python pick.py --wip            仅"动过但跑不通"
+    python pick.py --done           仅"测试已通过"（用于复盘）
+    python pick.py --any            任意状态
 
-完成度判定（自动，无状态文件）
-- 用 AST 解析题目文件，看 class 里的方法体是不是还只剩 `pass`。
-- 你写代码替换掉 `# TODO: ... pass` 后，下次运行就自动认你做完了。
-- 想"重做"某题：把方法体清回 `pass`，或者直接 git restore 原模板。
+    python pick.py --all            池子改为全部 169 题（含 _labuladong_ext/）
+    python pick.py --all --done 5   全池子已通过的题里抽 5 道
 
-故意只输出"题号 + 题名 + 文件路径"，不打印 HIGH_FREQ.md 里的细分类
-（哈希/双指针/DP...）。要做到全盲，去 leetcode.cn 搜题号即可。
+状态管理
+--------
+    python pick.py --status         看进度统计
+    python pick.py --sync           强制重新跑所有"动过"的文件刷新缓存
+    python pick.py mark 1 5 14      手动标 done（即使测试不过）
+    python pick.py wip 1 5          手动标 wip
+    python pick.py reset 1 5        清除手动标记，恢复自动检测
+
+完成度判定
+----------
+1. 文件含 `# TODO: 在这里写你的解法` 且方法体仍是 pass → 标记 untouched（不跑测试，秒判）
+2. 否则 subprocess 跑 `python <文件>` 15s 超时；
+   exit 0 → done；非 0 / 超时 / 异常 → wip
+3. 结果缓存到 .pick_state.json（按 mtime 失效；本目录下 .gitignore 已忽略）
+4. 手动标记（mark / wip）会盖过自动；reset 后才重新自动跑
+
+故意只输出"题号 + 题名 + 文件路径"，不打印 HIGH_FREQ.md 里的细分类。
 """
 import ast
+import json
 import random
 import re
+import subprocess
 import sys
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
+
+# 强制 stdout/stderr 用 UTF-8，避免 Windows 默认 GBK 控制台遇到 emoji 崩溃
+try:
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+except (AttributeError, OSError):
+    pass
 
 
 ROOT = Path(__file__).parent
 HF = ROOT / "HIGH_FREQ.md"
+CACHE_PATH = ROOT / ".pick_state.json"
+TEST_TIMEOUT = 15
+TODO_MARKER = "# TODO: 在这里写你的解法"
 
 
-# ----- 题库加载 -------------------------------------------------------------
-def _slice_section(text: str, header_re: str, end_re: Optional[str]) -> str:
-    """截取 markdown 中以 header_re 开头到 end_re（或文末）之前的内容。"""
+# ============================================================================
+# 题库加载
+# ============================================================================
+def _slice(text: str, header_re: str, end_re: Optional[str]) -> str:
     if end_re:
         m = re.search(rf"({header_re}.*?)(?={end_re}|\Z)", text, re.DOTALL)
     else:
@@ -46,7 +70,7 @@ def _slice_section(text: str, header_re: str, end_re: Optional[str]) -> str:
     return m.group(1) if m else ""
 
 
-def _parse_problems(section: str) -> List[Tuple[int, str, str, bool]]:
+def _parse(section: str) -> List[Tuple[int, str, str, bool]]:
     out = []
     pat = re.compile(r"- #(\d+)\s+([^→]+?)\s*→\s*\[[^\]]+\]\(([^)]+)\)")
     for line in section.splitlines():
@@ -63,16 +87,12 @@ def _parse_problems(section: str) -> List[Tuple[int, str, str, bool]]:
 
 
 def load_problems(include_ext: bool) -> List[Tuple[int, str, str, bool]]:
-    """从 HIGH_FREQ.md 加载题库。include_ext=True 时含 labuladong 扩展。"""
     if not HF.exists():
         raise SystemExit(f"找不到 HIGH_FREQ.md: {HF}")
     text = HF.read_text(encoding="utf-8")
-    hot = _slice_section(text, r"##\s+🔥\s*Hot 100", r"##\s+📚")
-    items = _parse_problems(hot)
+    items = _parse(_slice(text, r"##\s+🔥\s*Hot 100", r"##\s+📚"))
     if include_ext:
-        ext = _slice_section(text, r"##\s+📚", None)
-        items += _parse_problems(ext)
-    # 去重（按题号；扩展区不会和 Hot 100 题号冲突，这里仅保险）
+        items += _parse(_slice(text, r"##\s+📚", None))
     seen, unique = set(), []
     for it in items:
         if it[0] not in seen:
@@ -81,27 +101,39 @@ def load_problems(include_ext: bool) -> List[Tuple[int, str, str, bool]]:
     return unique
 
 
-# ----- 完成度检测 -----------------------------------------------------------
-def is_undone(file_path: Path) -> bool:
-    """
-    通过 AST 检测：任意一个函数/方法体仍是「单独一个 pass」就视为未做。
-    跳过 docstring；考虑所有 class（Solution / LRUCache / Codec 等）。
-    """
-    if not file_path.exists():
-        return True
+# ============================================================================
+# 状态缓存
+# ============================================================================
+def load_cache() -> dict:
+    if not CACHE_PATH.exists():
+        return {"version": 1, "files": {}}
     try:
-        content = file_path.read_text(encoding="utf-8")
-        tree = ast.parse(content)
-    except (SyntaxError, UnicodeDecodeError):
-        return True
+        return json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return {"version": 1, "files": {}}
 
+
+def save_cache(cache: dict) -> None:
+    CACHE_PATH.write_text(
+        json.dumps(cache, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+
+
+# ============================================================================
+# 完成度自动检测
+# ============================================================================
+def _has_pass_only_method(content: str) -> bool:
+    """Return True if any function/method body is just `pass`."""
+    try:
+        tree = ast.parse(content)
+    except SyntaxError:
+        return False  # syntax error 让测试去判
     for node in ast.walk(tree):
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
             continue
         body = node.body
-        # 跳过 docstring
-        if (body
-                and isinstance(body[0], ast.Expr)
+        if (body and isinstance(body[0], ast.Expr)
                 and isinstance(body[0].value, ast.Constant)
                 and isinstance(body[0].value.value, str)):
             body = body[1:]
@@ -110,32 +142,203 @@ def is_undone(file_path: Path) -> bool:
     return False
 
 
-# ----- 进度统计 -------------------------------------------------------------
-def show_status() -> None:
+def _run_test(file_path: Path) -> bool:
+    """跑一遍测试，exit 0 = 通过。"""
+    try:
+        result = subprocess.run(
+            [sys.executable, str(file_path)],
+            capture_output=True,
+            timeout=TEST_TIMEOUT,
+            cwd=str(ROOT),
+        )
+        return result.returncode == 0
+    except (subprocess.TimeoutExpired, OSError):
+        return False
+
+
+def detect_status(file_path: Path) -> str:
+    """untouched | wip | done"""
+    if not file_path.exists():
+        return "untouched"
+    content = file_path.read_text(encoding="utf-8")
+    if TODO_MARKER in content and _has_pass_only_method(content):
+        return "untouched"
+    return "done" if _run_test(file_path) else "wip"
+
+
+def get_status(rel_path: str, cache: dict, force: bool = False) -> str:
+    """带缓存的状态查询。"""
+    file_path = ROOT / rel_path
+    files = cache.setdefault("files", {})
+    entry = files.get(rel_path)
+
+    if not file_path.exists():
+        files.pop(rel_path, None)
+        return "untouched"
+
+    # 手动标记永远赢（除非显式 reset 或 force=sync）
+    if entry and entry.get("manual") and not force:
+        return entry["status"]
+
+    mtime = file_path.stat().st_mtime
+    if (not force and entry
+            and not entry.get("manual")
+            and abs(entry.get("mtime", 0) - mtime) < 0.001):
+        return entry["status"]
+
+    status = detect_status(file_path)
+    files[rel_path] = {"status": status, "mtime": mtime, "manual": False}
+    return status
+
+
+# ============================================================================
+# 命令分发
+# ============================================================================
+def cmd_show_status(cache: dict) -> None:
+    items_hot = load_problems(False)
+    items_all = load_problems(True)
+
     def stats(items):
-        done = sum(1 for it in items if not is_undone(ROOT / it[2]))
-        return done, len(items)
+        out = {"untouched": 0, "wip": 0, "done": 0}
+        for it in items:
+            out[get_status(it[2], cache)] += 1
+        return out
 
-    hot = load_problems(False)
-    full = load_problems(True)
-    h_done, h_tot = stats(hot)
-    f_done, f_tot = stats(full)
-    print(f"Hot 100        : {h_done:>3} done / {h_tot - h_done:>3} undone   ({h_done * 100 // max(h_tot, 1)}%)")
-    print(f"全部 {f_tot} 题  : {f_done:>3} done / {f_tot - f_done:>3} undone   ({f_done * 100 // max(f_tot, 1)}%)")
+    h = stats(items_hot)
+    a = stats(items_all)
+    save_cache(cache)
+
+    h_total = sum(h.values())
+    a_total = sum(a.values())
+
+    def line(label, total, c):
+        return (f"  {label:<10} done {c['done']:>3}  /  "
+                f"wip {c['wip']:>3}  /  untouched {c['untouched']:>3}   "
+                f"({c['done']*100//max(total,1)}% 通过)")
+
+    print(line(f"Hot 100 ({h_total})", h_total, h))
+    print(line(f"全部 ({a_total})", a_total, a))
 
 
-# ----- CLI ----------------------------------------------------------------
-def parse_args(argv):
+def cmd_sync(cache: dict) -> None:
+    """重新跑所有「动过」的文件（untouched 跳过，因为它们一定 untouched）。"""
+    items = load_problems(True)
+    refreshed = 0
+    for num, name, path, star in items:
+        rel = path
+        # force 不影响 manual
+        before = cache.get("files", {}).get(rel, {})
+        if before.get("manual"):
+            continue
+        get_status(rel, cache, force=True)
+        refreshed += 1
+        if refreshed % 20 == 0:
+            print(f"  ...checked {refreshed}")
+    save_cache(cache)
+    print(f"sync 完成，重检 {refreshed} 题")
+    cmd_show_status(cache)
+
+
+def cmd_mark(action: str, nums: List[int], cache: dict) -> None:
+    """action: 'done' | 'wip' | 'reset'"""
+    items = load_problems(True)
+    by_num = {it[0]: it[2] for it in items}
+    files = cache.setdefault("files", {})
+    affected = []
+    missed = []
+    for num in nums:
+        if num not in by_num:
+            missed.append(num)
+            continue
+        rel = by_num[num]
+        path = ROOT / rel
+        if action == "reset":
+            files.pop(rel, None)
+        else:
+            files[rel] = {
+                "status": action,
+                "mtime": path.stat().st_mtime if path.exists() else 0.0,
+                "manual": True,
+            }
+        affected.append(num)
+    save_cache(cache)
+    if affected:
+        print(f"[{action}] 标记 {len(affected)} 题: {affected}")
+    if missed:
+        print(f"  ! 不在题库: {missed}")
+
+
+def cmd_pick(opts: dict, cache: dict) -> None:
+    items = load_problems(opts["include_ext"])
+    if opts["star_only"]:
+        items = [it for it in items if it[3]]
+
+    statuses = {it[2]: get_status(it[2], cache) for it in items}
+    save_cache(cache)
+
+    sf = opts["status"]
+    if sf == "undone":
+        items = [it for it in items if statuses[it[2]] in ("untouched", "wip")]
+    elif sf in ("done", "wip", "untouched"):
+        items = [it for it in items if statuses[it[2]] == sf]
+    # any: 不过滤
+
+    if not items:
+        suggest = {
+            "undone": "试 --done 复盘，--any 全状态，或 --all 把扩展加进来",
+            "done": "还没有已通过的题。先 python pick.py 抽一道做",
+            "wip": "没有进行中的题。试 --untouched 抽全新的",
+            "untouched": "全部都摸过了 🎉",
+            "any": "空池",
+        }[sf]
+        print(f"候选为空。{suggest}")
+        return
+
+    n = opts["n"]
+    picks = random.sample(items, min(n, len(items)))
+    pool_label = f"全部 {len(load_problems(True))} 题" if opts["include_ext"] else "Hot 100"
+    sf_label = {"undone": "未做", "done": "已通过", "wip": "进行中",
+                "untouched": "全新", "any": "全状态"}[sf]
+    star_label = "★ " if opts["star_only"] else ""
+
+    print(f"——— 从 {pool_label} 的 {star_label}{sf_label}（{len(items)} 题候选）抽 {len(picks)} 道 ———")
+    for num, name, path, star in picks:
+        s = statuses[path]
+        icon = {"untouched": "⚪", "wip": "🚧", "done": "✅"}[s]
+        marker = " ★" if star else ""
+        print(f"  {icon} #{num}{marker}  {name}")
+        print(f"        → {path}")
+
+
+# ============================================================================
+# CLI 解析
+# ============================================================================
+def parse_args(argv: List[str]) -> dict:
+    if argv and argv[0] in ("mark", "wip", "reset"):
+        action = argv[0]
+        nums = []
+        for a in argv[1:]:
+            try:
+                nums.append(int(a))
+            except ValueError:
+                pass
+        return {"cmd": action, "nums": nums}
+
     star_only = False
     n = 1
-    status = "undone"      # undone | done | any
+    status = "undone"
     include_ext = False
     show_only = False
+    sync = False
     for a in argv:
         if a == "star":
             star_only = True
         elif a == "--done":
             status = "done"
+        elif a == "--wip":
+            status = "wip"
+        elif a == "--untouched":
+            status = "untouched"
         elif a == "--any":
             status = "any"
         elif a == "--undone":
@@ -144,6 +347,8 @@ def parse_args(argv):
             include_ext = True
         elif a == "--status":
             show_only = True
+        elif a == "--sync":
+            sync = True
         elif a in ("-h", "--help"):
             print(__doc__)
             sys.exit(0)
@@ -152,42 +357,35 @@ def parse_args(argv):
                 n = max(1, int(a))
             except ValueError:
                 pass
-    return star_only, n, status, include_ext, show_only
+    return {
+        "cmd": "pick",
+        "star_only": star_only,
+        "n": n,
+        "status": status,
+        "include_ext": include_ext,
+        "show_only": show_only,
+        "sync": sync,
+    }
 
 
 def main():
-    star_only, n, status, include_ext, show_only = parse_args(sys.argv[1:])
+    cache = load_cache()
+    opts = parse_args(sys.argv[1:])
 
-    if show_only:
-        show_status()
-        return
-
-    items = load_problems(include_ext)
-    if star_only:
-        items = [it for it in items if it[3]]
-    if status == "undone":
-        items = [it for it in items if is_undone(ROOT / it[2])]
-    elif status == "done":
-        items = [it for it in items if not is_undone(ROOT / it[2])]
-
-    if not items:
-        if status == "undone":
-            print("✨ 这个池子里全做完了。试 --done 复盘，--any 随便抽，或 --all 把扩展题也算进来。")
-        elif status == "done":
-            print("还没有已做的题。先随便抽一道做：python pick.py")
-        else:
-            print("候选为空。")
-        sys.exit(0)
-
-    picks = random.sample(items, min(n, len(items)))
-    pool_label = f"全部 {len(load_problems(True))} 题" if include_ext else "Hot 100"
-    status_label = {"undone": "未做", "done": "已做", "any": "全状态"}[status]
-    star_label = "★ " if star_only else ""
-    print(f"——— 从 {pool_label} 的 {star_label}{status_label}（{len(items)} 题候选）抽 {len(picks)} 道 ———")
-    for num, name, path, star in picks:
-        marker = " ★" if star else ""
-        print(f"  #{num}{marker}  {name}")
-        print(f"        → {path}")
+    if opts["cmd"] in ("done_alias", "mark"):
+        cmd_mark("done", opts["nums"], cache)
+    elif opts["cmd"] == "wip":
+        cmd_mark("wip", opts["nums"], cache)
+    elif opts["cmd"] == "reset":
+        cmd_mark("reset", opts["nums"], cache)
+    elif opts["cmd"] == "pick":
+        if opts["sync"]:
+            cmd_sync(cache)
+            return
+        if opts["show_only"]:
+            cmd_show_status(cache)
+            return
+        cmd_pick(opts, cache)
 
 
 if __name__ == "__main__":
