@@ -226,7 +226,122 @@ for i in range(m):
 
 ---
 
-## 12. 递归限制
+## 12. Python 独有简写（TS 里没有 / 写法相反）
+
+刷题里反复出现，写惯了能省一半代码。**TS 没有等价物或写法不一样的**重点标 ★。
+
+### ★ 链式比较 `0 <= x < n`
+
+```python
+if 0 <= nr < m and 0 <= nc < n:    # 网格越界检查
+    ...
+```
+
+TS 必须写两段：`nr >= 0 && nr < m`。Python 直接夹逼。任意比较都能链：`a < b < c <= d`。
+
+### ★ 链式赋值 `a = b = c = 0`
+
+```python
+r = c = di = 0          # 三个变量同时初始化为 0
+left = right = head     # 双指针起点
+```
+
+注意：链式赋值给的是**同一个对象**。用于不可变值（int/str）没问题；用于 list 等可变对象会共享引用：
+```python
+a = b = []      # 危险：a 和 b 是同一个 list
+a.append(1)     # b 也变了
+```
+
+### ★ `_` 当占位符
+
+```python
+for _ in range(n):       # 不需要循环变量值，明示"我不用 i"
+    do_something()
+
+a, _, c = (1, 2, 3)      # 解包时丢弃中间元素
+
+prev2, _ = prev2, prev1  # 不在乎右侧某项
+```
+
+TS 里只能写 `for (let i = 0; i < n; i++)` 然后假装 i 不存在。
+
+### ★ 列表推导一维 / 二维
+
+```python
+# 一维
+squares = [x * x for x in range(10)]
+evens = [x for x in nums if x % 2 == 0]
+
+# 二维（每行独立一份）
+visited = [[False] * n for _ in range(m)]
+
+# ⚠ 经典坑：[[False] * n] * m 是 m 个相同引用
+bad = [[False] * 3] * 4
+bad[0][0] = True         # 4 行第 0 列全变 True
+```
+
+带条件的推导：`[expr for x in iter if cond]`。也可以嵌套：`[(i, j) for i in range(m) for j in range(n)]`。
+
+### ★ 生成器表达式（圆括号代替方括号）
+
+```python
+total = sum(x * 2 for x in nums)      # 不创建中间 list，省内存
+has_neg = any(x < 0 for x in nums)
+all_pos = all(x > 0 for x in nums)
+min_len = min(len(s) for s in strs)
+```
+
+外层是函数调用时圆括号可省。`sum([...])` 等价但浪费一份 list。
+
+### 多重解包
+
+```python
+a, b = b, a                      # 交换，不需要临时变量
+first, *rest = [1, 2, 3, 4]      # first=1, rest=[2,3,4]
+*init, last = [1, 2, 3, 4]       # init=[1,2,3], last=4
+a, *_, c = [1, 2, 3, 4]          # 只要首尾
+
+# 字典解包
+merged = {**d1, **d2}            # 合并 dict（d2 覆盖 d1）
+```
+
+### `in` 多值匹配
+
+```python
+if ch in "()[]{}":               # 字符在串里
+    ...
+if val in (None, 0, False):      # 多值检查（TS 写 ||| 链）
+    ...
+if name in {"a", "b", "c"}:      # set 查 O(1)；元组/列表 O(n)
+    ...
+```
+
+TS 等价是 `[a, b, c].includes(val)` 或 `val === a || val === b || ...`。
+
+### 三元（语序跟 TS 反！）
+
+```python
+x = a if cond else b             # Python：值-条件-备选
+# TS:  x = cond ? a : b          # 条件-值-备选
+```
+
+刚切过来最容易写错语序。**记住 Python 的"先说想要的，再说何时要"**。
+
+### f-string 调试小技巧
+
+```python
+n = 42
+print(f"{n=}")                   # 输出：n=42
+print(f"{nums[i]=}")             # 输出：nums[i]=...
+print(f"{i:>4}")                 # 右对齐宽 4
+print(f"{x:.2f}")                # 保留 2 位小数
+```
+
+`{var=}` 是 Python 3.8+ 的写法，调试时不用打标签：`print(f"{i=} {j=} {res=}")` 一次性看完所有变量。
+
+---
+
+## 13. 递归限制
 
 ```python
 import sys
@@ -237,7 +352,7 @@ LeetCode 默认大约 1000 层，链表题或深树会爆栈。
 
 ---
 
-## 13. 调试技巧
+## 14. 调试技巧
 
 - 直接 `print(...)` 输出中间值，比 IDE 调试器快。
 - 复杂结构：`from pprint import pprint; pprint(grid)`。
