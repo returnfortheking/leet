@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/pascals-triangle/
 ----
 - 1 <= numRows <= 30
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（最简递推：row[i] = prev[i-1] + prev[i]，两端补 0）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

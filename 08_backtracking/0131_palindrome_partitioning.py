@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/palindrome-partitioning/
 - 1 <= s.length <= 16
 - s 仅由小写英文字母组成
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md。
-（思路：回溯枚举切点；可结合 DP 预处理 isPalin[i][j] 加速）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/
 - points[i].length == 2
 - -2^31 <= x_start <= x_end <= 2^31 - 1
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md 的「区间贪心」模板。
-（按右端点排序，每箭尽量射在最早结束的气球右端点；该位置覆盖到的都不再需要新箭）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

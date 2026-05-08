@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/subarray-sums-divisible-by-k/
 - -10^4 <= nums[i] <= 10^4
 - 2 <= k <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 15_prefix_sum/NOTES.md。
-（思路：前缀和 mod k 同余 → 哈希计数；初始 {0:1} 处理整段子数组）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

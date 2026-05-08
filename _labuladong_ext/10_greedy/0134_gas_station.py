@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/gas-station/
 - 1 <= n <= 10^5
 - 0 <= gas[i], cost[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md 的「加油站」模板。
-（O(n) 单次扫描：tank 一旦为负就把起点设为 i+1）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/cheapest-flights-within-k-stops/
 - 1 <= price <= 10^4
 - 0 <= k <= n - 1
 
-提示
-----
-卡住超过 25 分钟再去看 14_graph/NOTES.md 的「Bellman-Ford」模板。
-（中转 k 次 = 最多 k+1 条边；做 k+1 轮松弛；注意每轮基于上一轮的 dist）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

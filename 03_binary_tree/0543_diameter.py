@@ -12,10 +12,6 @@ Link: https://leetcode.cn/problems/diameter-of-binary-tree/
 - 节点数 1 <= n <= 10^4
 - -100 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md 的「后序返回值」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

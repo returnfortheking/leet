@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/copy-list-with-random-pointer/
 - -10^4 <= Node.val <= 10^4
 - random 指向链表中某节点或 None
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（两种解法：哈希表 O(n) 空间；原地穿插 + 拆分 O(1) 空间）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

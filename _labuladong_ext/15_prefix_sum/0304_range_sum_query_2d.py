@@ -16,10 +16,6 @@ Link: https://leetcode.cn/problems/range-sum-query-2d-immutable/
 - -10^5 <= matrix[i][j] <= 10^5
 - 调用次数 <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 15_prefix_sum/NOTES.md 的「二维前缀和」模板。
-
 复杂度（解完后填）
 ------
 init：O(?)    query：O(?)    空间：O(?)

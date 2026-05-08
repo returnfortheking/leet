@@ -12,12 +12,6 @@ Link: https://leetcode.cn/problems/partition-labels/
 - 1 <= s.length <= 500
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md。
-（思路：先记录每个字母最后出现位置 last[ch]；扫描时维护当前片段的 end = max(end, last[ch])，
-  当 i == end 时切一刀）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,12 +13,6 @@ Link: https://leetcode.cn/problems/intersection-of-two-linked-lists/
 - 1 <= m, n <= 3 * 10^4
 - 1 <= Node.val <= 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（思路：两指针 a / b，分别从 headA / headB 出发；走到尽头切到对方头；
-  若有交点，会在交点相遇；否则同时走到 None）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

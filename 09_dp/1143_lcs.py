@@ -12,10 +12,6 @@ Link: https://leetcode.cn/problems/longest-common-subsequence/
 - 1 <= text1.length, text2.length <= 1000
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「LCS」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/serialize-and-deserialize-binary-tree/
 - 节点数 0 <= n <= 10^4
 - -1000 <= Node.val <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：BFS 层序 + None 占位；或前序 DFS + None 占位用 "#")
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/
 - 1 <= prices.length <= 10^5
 - 0 <= prices[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（思路：扫描时维护历史最低价，当前利润 = price - 历史最低）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

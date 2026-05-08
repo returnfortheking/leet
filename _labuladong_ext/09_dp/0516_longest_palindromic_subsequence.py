@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/longest-palindromic-subsequence/
 - 1 <= s.length <= 1000
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「区间 DP」思路。
-（dp[i][j] = s[i..j] 内最长回文子序列长度；按区间长度从小到大转移）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

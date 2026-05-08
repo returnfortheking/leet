@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/search-insert-position/
 - nums 严格升序
 - -10^4 <= target <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md 的「左边界二分」模板。
-（即 left_bound：找第一个 >= target 的下标）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

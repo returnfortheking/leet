@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/majority-element/
 - 1 <= nums.length <= 5 * 10^4
 - -10^9 <= nums[i] <= 10^9
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（最优：Boyer-Moore 投票——维护候选 + 计数，遇到相同则 +1，不同则 -1，归零换候选）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

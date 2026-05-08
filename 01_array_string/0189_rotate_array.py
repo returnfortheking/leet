@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/rotate-array/
 - -2^31 <= nums[i] <= 2^31 - 1
 - 0 <= k <= 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md 的「三次反转」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

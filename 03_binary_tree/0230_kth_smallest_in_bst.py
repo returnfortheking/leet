@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/kth-smallest-element-in-a-bst/
 - 1 <= k <= n
 - 0 <= Node.val <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：BST 中序遍历是升序——遍历到第 k 个直接返回）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

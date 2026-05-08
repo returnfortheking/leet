@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/design-add-and-search-words-data-structure/
 - 调用 addWord 总次数 <= 10^4
 - 仅小写字母与 '.'
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md。
-（思路：Trie + DFS：遇到 '.' 时枚举所有子节点）
-
 复杂度（解完后填）
 ------
 addWord: O(?)    search: O(?)    空间：O(?)

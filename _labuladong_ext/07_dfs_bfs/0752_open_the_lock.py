@@ -16,11 +16,6 @@ Link: https://leetcode.cn/problems/open-the-lock/
 - target 不在 deadends 中
 - target / deadends[i] 都是 4 位数字字符串
 
-提示
-----
-卡住超过 25 分钟再去看 07_dfs_bfs/NOTES.md 的「BFS 状态空间」模板。
-（每个状态有 8 个邻居：4 个轮子 × 上下两方向）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

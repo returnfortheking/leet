@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/subsets/
 - -10 <= nums[i] <= 10
 - nums 元素互不相同
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md 的「子集回溯」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

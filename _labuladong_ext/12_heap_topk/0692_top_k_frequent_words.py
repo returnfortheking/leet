@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/top-k-frequent-words/
 - words[i] 仅由小写字母组成
 - 1 <= k <= words 中不同单词的数量
 
-提示
-----
-卡住超过 25 分钟再去看 12_heap_topk/NOTES.md。
-（思路：Counter + 排序，注意排序键 (-cnt, word) 可一步到位）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/house-robber-iii/
 - 节点数 1 <= n <= 10^4
 - 0 <= Node.val <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「树形 DP」模板。
-（每个节点返回 (不偷, 偷) 两种状态）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

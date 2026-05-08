@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/path-sum-iii/
 - -10^9 <= Node.val <= 10^9
 - -1000 <= targetSum <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 15_prefix_sum/NOTES.md 的「树上前缀和」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

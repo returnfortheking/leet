@@ -11,10 +11,6 @@ Link: https://leetcode.cn/problems/longest-substring-without-repeating-character
 - 0 <= s.length <= 5 * 10^4
 - s 由英文字母、数字、符号和空格组成
 
-提示
-----
-卡住超过 25 分钟再去看 05_sliding_window/NOTES.md 的「最长型滑窗」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

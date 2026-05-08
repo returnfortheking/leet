@@ -17,11 +17,6 @@ Link: https://leetcode.cn/problems/insert-delete-getrandom-o1/
 - getRandom 调用前集合非空
 - 调用次数 <= 2 * 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md。
-（关键：list 存值 + dict 存 val→idx；删除时把末尾元素换到要删的位置，避免 O(n)）
-
 复杂度（解完后填）
 ------
 所有操作 期望 O(?)    空间：O(?)

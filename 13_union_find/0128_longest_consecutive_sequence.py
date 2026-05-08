@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/longest-consecutive-sequence/
 - 0 <= nums.length <= 10^5
 - -10^9 <= nums[i] <= 10^9
 
-提示
-----
-卡住超过 25 分钟再去看 13_union_find/NOTES.md。
-（最简思路：用 set；只从"序列起点"（即 x-1 不在 set 中的 x）开始向上数。也可用并查集。）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

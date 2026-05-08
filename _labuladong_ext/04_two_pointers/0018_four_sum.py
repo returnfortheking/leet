@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/4sum/
 - -10^9 <= nums[i] <= 10^9
 - -10^9 <= target <= 10^9
 
-提示
-----
-卡住超过 25 分钟再去看 04_two_pointers/NOTES.md。
-（思路：排序 + 双层 for + 内层左右双指针；四层去重）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/letter-combinations-of-a-phone-number/
 - 0 <= digits.length <= 4
 - digits[i] in {2..9}
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md。
-（思路：经典回溯，按位推进）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

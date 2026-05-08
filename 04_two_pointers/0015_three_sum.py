@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/3sum/
 - 3 <= nums.length <= 3000
 - -10^5 <= nums[i] <= 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 04_two_pointers/NOTES.md 的「三数之和」模板。
-（关键词：排序 + 双指针 + 三层去重）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,10 +12,6 @@ Link: https://leetcode.cn/problems/course-schedule/
 - 1 <= numCourses <= 2000
 - 0 <= prerequisites.length <= 5000
 
-提示
-----
-卡住超过 25 分钟再去看 14_graph/NOTES.md 的「拓扑排序」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

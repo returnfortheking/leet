@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/find-median-from-data-stream/
 - 调用 findMedian 时至少有一个元素
 - 总调用次数 <= 5 * 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 12_heap_topk/NOTES.md 或 16_design/NOTES.md 的「双堆」模板。
-（大顶堆存较小一半 + 小顶堆存较大一半；维护两堆大小差 <= 1）
-
 复杂度（解完后填）
 ------
 addNum: O(?)    findMedian: O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/container-with-most-water/
 - 2 <= n <= 10^5
 - 0 <= height[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 04_two_pointers/NOTES.md。
-（思路：左右双指针，每次移动较矮的一端——较矮的板决定上限）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

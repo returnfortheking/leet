@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/sort-list/
 - 节点数 0 <= n <= 5 * 10^4
 - -10^5 <= Node.val <= 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（思路：归并排序——快慢指针找中点 + 合并两个有序链表）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

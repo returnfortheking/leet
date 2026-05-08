@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/combination-sum-ii/
 - 1 <= candidates[i] <= 50
 - 1 <= target <= 30
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md 的「组合去重」模板。
-（关键：排序后同层跳过相同值；递归时 i+1 不复用）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

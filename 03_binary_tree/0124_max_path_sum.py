@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/binary-tree-maximum-path-sum/
 - 节点数 1 <= n <= 3 * 10^4
 - -1000 <= Node.val <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md 的「后序返回值」模板。
-（同 #543 模板：返回单边贡献给上层；统计经过当前节点的路径作为答案）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/jump-game-ii/
 - 0 <= nums[i] <= 1000
 - 总能到达终点
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md 的「跳跃游戏 II」模板。
-（思路：维护当前能到的最远位置 far、当前层边界 end；i == end 时步数 +1）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

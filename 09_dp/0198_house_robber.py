@@ -12,10 +12,6 @@ Link: https://leetcode.cn/problems/house-robber/
 - 1 <= nums.length <= 100
 - 0 <= nums[i] <= 400
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「一维线性 DP」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

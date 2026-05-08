@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/symmetric-tree/
 - 节点数 1 <= n <= 1000
 - -100 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：写一个 isMirror(a, b) 比较两棵子树是否互为镜像）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

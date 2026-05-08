@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/single-number/
 - 1 <= nums.length <= 3 * 10^4
 - -3 * 10^4 <= nums[i] <= 3 * 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：异或——任意 x ^ x = 0、x ^ 0 = x；全部异或一遍剩下的就是单独那个）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

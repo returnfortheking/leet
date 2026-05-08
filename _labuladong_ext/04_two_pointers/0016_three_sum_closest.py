@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/3sum-closest/
 - -1000 <= nums[i] <= 1000
 - -10^4 <= target <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 04_two_pointers/NOTES.md。
-（思路：排序 + 固定 i + 左右双指针；维护当前最接近的 sum）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

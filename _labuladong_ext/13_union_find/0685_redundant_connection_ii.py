@@ -14,12 +14,6 @@ Link: https://leetcode.cn/problems/redundant-connection-ii/
 - 3 <= n <= 1000
 - edges[i].length == 2
 
-提示
-----
-卡住超过 25 分钟再去看 13_union_find/NOTES.md。
-（分类讨论：(1) 有节点入度为 2 → 找出两条入边，删后一条若仍是树则删它，否则删前一条；
-  (2) 无入度为 2 但有环 → 用并查集找环上的最后一条边）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/binary-tree-right-side-view/
 - 节点数 0 <= n <= 100
 - -100 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md 的「层序遍历 BFS」模板。
-（思路一：BFS 取每层最后一个；思路二：DFS 按"根→右→左"顺序，记录每层第一次到达的节点）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

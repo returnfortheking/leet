@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/coin-change-ii/
 - 0 <= amount <= 5000
 - 各 coin 互不相同
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「完全背包计数」模板。
-（外层枚举硬币、内层枚举金额——保证组合不重复计数）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

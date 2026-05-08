@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/minimum-depth-of-binary-tree/
 - 节点数 0 <= n <= 10^5
 - -1000 <= Node.val <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 07_dfs_bfs/NOTES.md。
-（BFS 解最优：第一次遇到叶子时答案就是当前层；DFS 也行但需要小心：单边为空时不能取 min）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

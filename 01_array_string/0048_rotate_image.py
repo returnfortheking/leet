@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/rotate-image/
 - 1 <= n <= 20
 - -1000 <= matrix[i][j] <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：先沿主对角线转置，再左右翻转每一行——两步等价于顺时针 90°）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,12 +12,6 @@ Link: https://leetcode.cn/problems/next-permutation/
 - 1 <= nums.length <= 100
 - 0 <= nums[i] <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：从右往左找第一个 nums[i] < nums[i+1]；再从右往左找第一个 nums[j] > nums[i]；
-  swap(i, j)；reverse nums[i+1:]）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

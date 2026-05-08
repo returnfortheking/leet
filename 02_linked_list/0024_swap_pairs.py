@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/swap-nodes-in-pairs/
 - 节点数 0 <= n <= 100
 - 0 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（思路：dummy + 三指针——prev / a / b；每轮交换 a, b 后 prev 跨两步）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

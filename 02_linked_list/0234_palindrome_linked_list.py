@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/palindrome-linked-list/
 - 节点数 1 <= n <= 10^5
 - 0 <= Node.val <= 9
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（O(1) 空间思路：快慢指针找中点 → 反转后半段 → 两端同步比较；最后可以把后半段恢复）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

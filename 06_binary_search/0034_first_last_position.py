@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/find-first-and-last-position-of-element-in-so
 - -10^9 <= nums[i], target <= 10^9
 - 必须 O(log n)
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md 的「左右边界二分」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

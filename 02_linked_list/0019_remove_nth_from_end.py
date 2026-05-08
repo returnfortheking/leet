@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/remove-nth-node-from-end-of-list/
 - 1 <= n <= sz
 - 0 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（思路：dummy + 快慢指针；快指针先走 n+1 步再两指针同步走）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

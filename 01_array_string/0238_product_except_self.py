@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/product-of-array-except-self/
 - -30 <= nums[i] <= 30
 - 任何前缀/后缀积都在 32 位整数范围内
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：左前缀积 + 右后缀积；O(1) 空间用一个临时变量边扫边累乘）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

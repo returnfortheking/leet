@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/balanced-binary-tree/
 - 节点数 0 <= n <= 5000
 - -10^4 <= Node.val <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：后序返回值——递归同时返回 (是否平衡, 高度)，或用 -1 表示不平衡剪枝）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

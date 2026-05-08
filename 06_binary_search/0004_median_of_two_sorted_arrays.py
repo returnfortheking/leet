@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/median-of-two-sorted-arrays/
 - 1 <= m + n <= 2000
 - -10^6 <= nums1[i], nums2[i] <= 10^6
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md。
-（思路：对较短数组二分切割位置；一种常见思路是「找第 k 小」递归）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

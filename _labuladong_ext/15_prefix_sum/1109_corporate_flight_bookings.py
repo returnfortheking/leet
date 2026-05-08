@@ -16,10 +16,6 @@ Link: https://leetcode.cn/problems/corporate-flight-bookings/
 - 1 <= first <= last <= n
 - 1 <= seats <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 15_prefix_sum/NOTES.md 的「差分」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

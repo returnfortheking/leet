@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/word-break/
 - s 与 wordDict[i] 仅由小写字母组成
 - wordDict 中所有词互不相同
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（dp[i] = s[:i] 是否可拆；转移：存在 j，dp[j] 为真且 s[j:i] 在词典里）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

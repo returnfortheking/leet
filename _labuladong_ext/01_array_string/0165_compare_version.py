@@ -17,11 +17,6 @@ Link: https://leetcode.cn/problems/compare-version-numbers/
 - 仅包含数字和点号
 - 修订号无前导零（除非整段是 "0"）
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：split('.') 后逐段 int 比较）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

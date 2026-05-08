@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/find-minimum-in-rotated-sorted-array/
 - nums 中元素互不相同
 - nums 是某升序数组的旋转
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md。
-（思路：与右端点 nums[r] 比较；若 nums[mid] > nums[r] 则最小在右侧）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

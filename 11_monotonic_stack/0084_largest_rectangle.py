@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/largest-rectangle-in-histogram/
 - 1 <= heights.length <= 10^5
 - 0 <= heights[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md 的「柱状图最大矩形」模板。
-（前后加 0 哨兵；单调递增栈，破坏单调性时弹出并结算面积）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

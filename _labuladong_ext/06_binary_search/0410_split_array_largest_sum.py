@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/split-array-largest-sum/
 - 0 <= nums[i] <= 10^6
 - 1 <= k <= min(50, nums.length)
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md 的「二分答案」模板。
-（思路：在 [max(nums), sum(nums)] 上二分；feasible(x)：贪心切片使每段和不超过 x，看片数是否 ≤ k）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

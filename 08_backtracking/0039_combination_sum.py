@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/combination-sum/
 - candidates 元素互不相同
 - 1 <= target <= 40
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md 的「组合（元素可复用）」模板。
-（关键：递归调用时 i 不变保持可重复使用）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

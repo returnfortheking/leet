@@ -15,12 +15,6 @@ Link: https://leetcode.cn/problems/surrounded-regions/
 - 1 <= m, n <= 200
 - board[i][j] in {'X', 'O'}
 
-提示
-----
-卡住超过 25 分钟再去看 07_dfs_bfs/NOTES.md。
-（思路：从边界的 O 开始 DFS / BFS，把它们临时标成 '#'；
-  最后 O→X，#→O）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

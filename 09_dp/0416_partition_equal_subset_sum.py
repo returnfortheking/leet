@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/partition-equal-subset-sum/
 - 1 <= nums.length <= 200
 - 1 <= nums[i] <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「0-1 背包」模板。
-（化为：能否从 nums 中选若干元素使和等于 sum/2）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

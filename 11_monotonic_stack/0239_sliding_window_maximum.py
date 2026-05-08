@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/sliding-window-maximum/
 - -10^4 <= nums[i] <= 10^4
 - 1 <= k <= nums.length
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md 的「单调队列」模板。
-（deque 维护下标；每入队前先把比当前小的从队尾踢掉，超出窗口的从队首踢掉）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

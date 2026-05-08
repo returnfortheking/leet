@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/rotting-oranges/
 - 1 <= m, n <= 10
 - grid[i][j] in {0, 1, 2}
 
-提示
-----
-卡住超过 25 分钟再去看 07_dfs_bfs/NOTES.md 的「多源 BFS」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

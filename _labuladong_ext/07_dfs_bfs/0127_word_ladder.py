@@ -16,11 +16,6 @@ Link: https://leetcode.cn/problems/word-ladder/
 - 1 <= wordList.length <= 5000
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 07_dfs_bfs/NOTES.md 的「BFS 按层」模板。
-（图节点是单词，邻居是仅 1 字母不同的单词。可以用通配符 "h*t" 桶建图加速）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

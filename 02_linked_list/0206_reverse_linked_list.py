@@ -11,10 +11,6 @@ Link: https://leetcode.cn/problems/reverse-linked-list/
 - 节点数 0 <= n <= 5000
 - -5000 <= Node.val <= 5000
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md 的「反转链表」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

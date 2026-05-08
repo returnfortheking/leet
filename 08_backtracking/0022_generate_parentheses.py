@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/generate-parentheses/
 ----
 - 1 <= n <= 8
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md 的「括号生成」模板。
-（关键约束：right < left 时才能放右括号）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

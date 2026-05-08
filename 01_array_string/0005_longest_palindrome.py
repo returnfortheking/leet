@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/longest-palindromic-substring/
 - 1 <= s.length <= 1000
 - s 仅由数字和英文字母组成
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md 的「中心扩展」模板。
-（也可学习 Manacher 算法，但中心扩展足以应付面试）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

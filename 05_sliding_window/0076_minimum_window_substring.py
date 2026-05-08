@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/minimum-window-substring/
 - 1 <= m, n <= 10^5
 - s 和 t 仅由英文字母组成
 
-提示
-----
-卡住超过 25 分钟再去看 05_sliding_window/NOTES.md 的「最短型滑窗」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

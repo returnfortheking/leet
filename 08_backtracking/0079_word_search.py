@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/word-search/
 - 1 <= word.length <= 15
 - 仅大小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md。
-（DFS + 回溯：访问后临时改成占位字符，回溯时恢复）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

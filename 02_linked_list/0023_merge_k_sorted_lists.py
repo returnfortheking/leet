@@ -16,11 +16,6 @@ Link: https://leetcode.cn/problems/merge-k-sorted-lists/
 - lists[i] 按升序排列
 - 总节点数 <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 12_heap_topk/NOTES.md 的「合并 K 个有序链表」模板。
-（两种解法：堆 / 分治两两合并；都要会写）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

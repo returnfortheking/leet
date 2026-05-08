@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/maximum-product-subarray/
 - -10 <= nums[i] <= 10
 - 任何前缀积都在 32 位整数范围内
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（关键：负数会让最大变最小、最小变最大；同时维护以 i 结尾的最大乘积和最小乘积）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

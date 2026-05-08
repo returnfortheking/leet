@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/target-sum/
 - 0 <= sum(nums) <= 1000
 - -1000 <= target <= 1000
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（转化：设正号子集和 P，负号子集和 N，P - N = target；P = (target + sum)/2，转 0-1 背包计数）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/lru-cache/
 - 调用次数 <= 2 * 10^5
 - 必须 O(1) 平均时间
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md 的「LRU 缓存」模板。
-（推荐先用 collections.OrderedDict 写出方案 A，被追问后再写方案 B：哈希 + 双向链表）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

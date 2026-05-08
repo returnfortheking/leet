@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/subarray-sum-equals-k/
 - -1000 <= nums[i] <= 1000
 - -10^7 <= k <= 10^7
 
-提示
-----
-卡住超过 25 分钟再去看 15_prefix_sum/NOTES.md 的「前缀和 + 哈希」模板。
-（注意：含负数时滑动窗口不可用，必须前缀和。）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

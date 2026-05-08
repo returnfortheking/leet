@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inord
 - -3000 <= Node.val <= 3000
 - preorder, inorder 由同一棵二叉树的不同遍历得到
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：preorder 第一个是根；在 inorder 里找到根的位置后，左右两段递归构造）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

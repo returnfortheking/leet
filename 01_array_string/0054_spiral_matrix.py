@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/spiral-matrix/
 - 1 <= m, n <= 10
 - -100 <= matrix[i][j] <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：维护四个边界 top/bottom/left/right，按"右 → 下 → 左 → 上"循环往内收缩）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/minimum-size-subarray-sum/
 - 1 <= nums.length <= 10^5
 - 1 <= nums[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 05_sliding_window/NOTES.md 的「最短型滑窗」模板。
-（数值约束型滑窗：right 加进总和，超 target 时左收）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

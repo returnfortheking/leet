@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/find-peak-element/
 - -2^31 <= nums[i] <= 2^31 - 1
 - 任意相邻元素不相等
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md。
-（思路：朝着 nums[mid] < nums[mid+1] 的那一侧二分，必能找到峰值）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

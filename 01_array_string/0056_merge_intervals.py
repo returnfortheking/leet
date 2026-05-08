@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/merge-intervals/
 - intervals[i].length == 2
 - 0 <= start_i <= end_i <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：按起点排序，扫描时合并相邻可重叠区间）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -18,12 +18,6 @@ Link: https://leetcode.cn/problems/lfu-cache/
 - 0 <= value <= 10^9
 - 调用次数 <= 2 * 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md。
-（思路：两层哈希——freq → 该频次的双向链表（按使用时间）；key → 节点；
-  维护 min_freq，淘汰时去 freq=min_freq 链表的尾部摘）
-
 复杂度（解完后填）
 ------
 get / put：O(?)    空间：O(?)

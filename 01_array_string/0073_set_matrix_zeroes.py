@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/set-matrix-zeroes/
 - 1 <= m, n <= 200
 - -2^31 <= matrix[i][j] <= 2^31 - 1
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（O(m+n) 空间：用两个数组记录哪些行/列要清零；O(1) 空间：用第一行第一列当标记位）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

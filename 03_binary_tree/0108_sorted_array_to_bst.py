@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/
 - -10^4 <= nums[i] <= 10^4
 - nums 严格升序
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：每次取中点作为根，左右两半递归构造左右子树）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

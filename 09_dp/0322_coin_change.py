@@ -13,10 +13,6 @@ Link: https://leetcode.cn/problems/coin-change/
 - 1 <= coins[i] <= 2^31 - 1
 - 0 <= amount <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「完全背包」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/valid-parentheses/
 - 1 <= s.length <= 10^4
 - s[i] 仅来自 "()[]{}"
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md（这道是栈基础）。
-（思路：栈——遇左括号入栈；遇右括号检查栈顶是否匹配，匹配则弹出，否则失败；最后栈空才算成功）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

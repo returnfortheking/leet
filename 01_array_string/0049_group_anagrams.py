@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/group-anagrams/
 - 0 <= strs[i].length <= 100
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：取一个"规范键"作为 dict 的 key —— 排序后字符串、或长度 26 的字母频次元组）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

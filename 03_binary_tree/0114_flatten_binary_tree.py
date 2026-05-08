@@ -13,12 +13,6 @@ Link: https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
 - 节点数 0 <= n <= 2000
 - -100 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（O(1) 空间思路：对每个节点，把左子树插到 root 与 root.right 之间——
-  即 root.right = root.left + 原 root.right；递归子节点继续）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/maximum-subarray/
 - 1 <= nums.length <= 10^5
 - -10^4 <= nums[i] <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md 的「Kadane」模板。
-（也可作为 09_dp 入门题：dp[i] = 以 i 结尾的最大子数组和）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

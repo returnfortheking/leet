@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/top-k-frequent-elements/
 - k 在 [1, 数组中不重复元素的个数] 范围
 - 答案唯一
 
-提示
-----
-卡住超过 25 分钟再去看 12_heap_topk/NOTES.md。
-（思路：Counter + 大小为 K 的堆，或桶排序 O(n)）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/maximal-rectangle/
 - 1 <= m, n <= 200
 - matrix[i][j] in {'0', '1'}
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md。
-（思路：每一行作为底，构造柱状图高度（连续 1 的累计高度），转化成 m 次 #84）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

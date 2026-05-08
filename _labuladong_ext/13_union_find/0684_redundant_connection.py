@@ -16,11 +16,6 @@ Link: https://leetcode.cn/problems/redundant-connection/
 - 1 <= edges[i][0], edges[i][1] <= n
 - 无自环
 
-提示
-----
-卡住超过 25 分钟再去看 13_union_find/NOTES.md。
-（思路：一边加边一边并查集；首次发现两端已在同一连通块时，这条边就是多余的）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

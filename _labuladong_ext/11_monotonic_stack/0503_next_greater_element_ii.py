@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/next-greater-element-ii/
 - 1 <= nums.length <= 10^4
 - -10^9 <= nums[i] <= 10^9
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md。
-（思路：把 nums 拼接两遍后用单调栈；下标取模回到原数组）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

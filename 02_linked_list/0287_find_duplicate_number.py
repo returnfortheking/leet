@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/find-the-duplicate-number/
 - 1 <= nums[i] <= n
 - 仅有一个重复整数（可能重复多次）
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md 的「Floyd 判圈」模板。
-（思路：把 nums 看成函数 f(i) = nums[i]，从 0 出发的"链"必然成环，环入口就是答案）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

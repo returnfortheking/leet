@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/search-a-2d-matrix-ii/
 - 1 <= m, n <= 300
 - -10^9 <= matrix[i][j], target <= 10^9
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md。
-（"Z 字搜索"：从右上角出发；当前比 target 小则下移，比 target 大则左移；O(m+n)）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

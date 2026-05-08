@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/linked-list-cycle/
 - -10^5 <= Node.val <= 10^5
 - pos = -1 或 0 <= pos < n（pos 是构造测试用的，函数本身看不到）
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md 的「快慢指针」模板。
-（哈希集合也能做但用了 O(n) 空间）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

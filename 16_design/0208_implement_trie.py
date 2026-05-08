@@ -17,10 +17,6 @@ Link: https://leetcode.cn/problems/implement-trie-prefix-tree/
 - 仅小写英文字母
 - 调用次数 <= 3 * 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md 的「Trie」模板。
-
 复杂度（解完后填）
 ------
 单次操作 O(?)    空间：O(?)

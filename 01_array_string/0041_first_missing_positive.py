@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/first-missing-positive/
 - 1 <= nums.length <= 10^5
 - -2^31 <= nums[i] <= 2^31 - 1
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：原地哈希——把 nums[i] 放到下标 nums[i]-1 处；最后扫一遍找第一个不匹配的位置）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

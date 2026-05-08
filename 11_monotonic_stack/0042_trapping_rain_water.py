@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/trapping-rain-water/
 - 1 <= n <= 2 * 10^4
 - 0 <= height[i] <= 10^5
 
-提示
-----
-卡住超过 25 分钟再去看 04_two_pointers/NOTES.md 或 11_monotonic_stack/NOTES.md。
-（双指针 / 单调栈两种解法都要会）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

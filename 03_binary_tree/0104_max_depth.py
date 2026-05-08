@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/maximum-depth-of-binary-tree/
 - 节点数 0 <= n <= 10^4
 - -100 <= Node.val <= 100
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（最经典的分治模板：max_depth(root) = 1 + max(left, right)）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

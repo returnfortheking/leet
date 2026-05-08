@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/delete-node-in-a-bst/
 - -10^5 <= Node.val, key <= 10^5
 - 节点值各不相同
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md 的「BST 关键操作」模板。
-（删除时分三种情况：无左子、无右子、左右都有 → 找右子树最小值替换）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

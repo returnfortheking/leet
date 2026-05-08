@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/queue-reconstruction-by-height/
 - 0 <= h_i <= 10^6
 - 0 <= k_i < people.length
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md 的「重建队列」模板。
-（思路：按 (-h, k) 排序后逐个 insert(k, p)；高的先排好，矮的插进去不影响高的人 k 值）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

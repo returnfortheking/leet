@@ -15,11 +15,6 @@ Link: https://leetcode.cn/problems/next-greater-element-i/
 - nums1, nums2 各自元素互不相同
 - nums1 中元素都出现在 nums2 中
 
-提示
-----
-卡住超过 25 分钟再去看 11_monotonic_stack/NOTES.md 的「下一个更大元素」模板。
-（先对 nums2 用单调栈预处理出每个值的"下一个更大"映射，再为 nums1 查表）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

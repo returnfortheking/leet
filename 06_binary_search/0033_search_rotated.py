@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/search-in-rotated-sorted-array/
 - nums 中元素互不相同
 - nums 是某升序数组的旋转
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md 的「旋转数组」模板。
-（每次先判断 mid 落在哪一段（左半有序还是右半有序），再缩小区间）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

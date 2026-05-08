@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/longest-increasing-subsequence/
 - -10^4 <= nums[i] <= 10^4
 - 进阶：能否做到 O(n log n)?
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md 的「LIS」模板。
-（O(n^2) DP 或 O(n log n) 二分 + tails 数组）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

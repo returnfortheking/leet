@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/non-overlapping-intervals/
 - intervals[i].length == 2
 - -5*10^4 <= start_i < end_i <= 5*10^4
 
-提示
-----
-卡住超过 25 分钟再去看 10_greedy/NOTES.md 的「区间贪心」模板。
-（按右端点排序，能选则选；未选的就是要删的）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/search-a-2d-matrix/
 - 1 <= m, n <= 100
 - -10^4 <= matrix[i][j], target <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 06_binary_search/NOTES.md。
-（思路：把二维下标 idx 映射为 (idx // n, idx % n)，对 [0, m*n) 做普通二分）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -16,11 +16,6 @@ Link: https://leetcode.cn/problems/min-stack/
 - pop / top / getMin 调用前栈非空
 - 调用次数 <= 3 * 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md 的「最小栈」模板。
-（思路：每个栈元素同时存 (值, 当前最小值)，或维护双栈）
-
 复杂度（解完后填）
 ------
 所有操作 O(?)    空间：O(?)

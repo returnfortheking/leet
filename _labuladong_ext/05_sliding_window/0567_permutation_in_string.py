@@ -12,10 +12,6 @@ Link: https://leetcode.cn/problems/permutation-in-string/
 - 1 <= s1.length, s2.length <= 10^4
 - 仅小写英文字母
 
-提示
-----
-卡住超过 25 分钟再去看 05_sliding_window/NOTES.md 的「定长滑窗」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

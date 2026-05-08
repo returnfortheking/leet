@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/number-of-provinces/
 - isConnected[i][i] == 1
 - isConnected[i][j] == isConnected[j][i]
 
-提示
-----
-卡住超过 25 分钟再去看 13_union_find/NOTES.md 的「并查集模板 + 计数连通分量」。
-也可以用 DFS / BFS 求连通分量。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -11,12 +11,6 @@ Link: https://leetcode.cn/problems/perfect-squares/
 ----
 - 1 <= n <= 10^4
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（完全背包：dp[i] = 1 + min(dp[i - k*k] for k*k <= i)。
-  也可数学解：四平方和定理（拉格朗日）+ 余数分类）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

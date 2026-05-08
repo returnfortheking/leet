@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/reverse-nodes-in-k-group/
 - 0 <= Node.val <= 1000
 - 1 <= k <= n
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md 的「K 个一组反转」模板。
-（高频中的高频，必背）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/find-all-anagrams-in-a-string/
 - 1 <= s.length, p.length <= 3 * 10^4
 - s, p 仅由小写字母组成
 
-提示
-----
-卡住超过 25 分钟再去看 05_sliding_window/NOTES.md 的「定长滑窗」模板。
-（思路：维护长度为 len(p) 的窗口，比较两个 26 字母数组）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

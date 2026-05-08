@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postor
 - 1 <= inorder.length == postorder.length <= 3000
 - -3000 <= Node.val <= 3000
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md。
-（思路：postorder 末尾是根；在 inorder 中定位根后切分两段；右子树先构建）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

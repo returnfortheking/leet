@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/longest-valid-parentheses/
 - 0 <= s.length <= 3 * 10^4
 - s[i] in {'(', ')'}
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md（也可用栈解法，参见 11_monotonic_stack）。
-（DP：dp[i] = 以 s[i] 结尾的最长有效长度；分 s[i]==')' 且 s[i-1]=='(' / s[i-1]==')' 两种情况）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

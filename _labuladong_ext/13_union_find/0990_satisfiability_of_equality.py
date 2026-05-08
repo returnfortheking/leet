@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/satisfiability-of-equality-equations/
 - equations[i][0], equations[i][3] 是小写字母
 - equations[i][1:3] in {"==", "!="}
 
-提示
-----
-卡住超过 25 分钟再去看 13_union_find/NOTES.md。
-（思路：先 union 所有 == 关系，再扫描 !=，若两端已 connected 则矛盾）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

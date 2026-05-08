@@ -12,11 +12,6 @@ Link: https://leetcode.cn/problems/longest-common-prefix/
 - 0 <= strs[i].length <= 200
 - strs[i] 仅由小写英文字母组成
 
-提示
-----
-卡住超过 25 分钟再去看 01_array_string/NOTES.md。
-（思路：纵向扫描 / 横向两两比较 / 排序后比首尾）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

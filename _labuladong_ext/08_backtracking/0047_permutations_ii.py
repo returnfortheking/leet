@@ -11,11 +11,6 @@ Link: https://leetcode.cn/problems/permutations-ii/
 - 1 <= nums.length <= 8
 - -10 <= nums[i] <= 10
 
-提示
-----
-卡住超过 25 分钟再去看 08_backtracking/NOTES.md 的「排列去重」模板。
-（关键：排序后跳过同层重复——nums[i]==nums[i-1] 且 used[i-1] 未使用 → continue）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

@@ -18,10 +18,6 @@ Link: https://leetcode.cn/problems/implement-queue-using-stacks/
 - 调用次数 <= 100
 - 调用 pop / peek 前队列非空
 
-提示
-----
-卡住超过 25 分钟再去看 16_design/NOTES.md 的「用栈实现队列」模板。
-
 复杂度（解完后填）
 ------
 push: O(?)    pop: O(?) 均摊    空间：O(?)

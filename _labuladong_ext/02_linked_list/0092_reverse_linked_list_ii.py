@@ -13,11 +13,6 @@ Link: https://leetcode.cn/problems/reverse-linked-list-ii/
 - -500 <= Node.val <= 500
 - 1 <= left <= right <= n
 
-提示
-----
-卡住超过 25 分钟再去看 02_linked_list/NOTES.md。
-（思路：dummy 头 + 找到 left 前驱 + 局部反转 right - left + 1 个节点 + 接回）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

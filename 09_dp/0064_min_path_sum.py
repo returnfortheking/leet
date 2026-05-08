@@ -14,11 +14,6 @@ Link: https://leetcode.cn/problems/minimum-path-sum/
 - 1 <= m, n <= 200
 - 0 <= grid[i][j] <= 200
 
-提示
-----
-卡住超过 25 分钟再去看 09_dp/NOTES.md。
-（dp[i][j] = grid[i][j] + min(dp[i-1][j], dp[i][j-1])）
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)

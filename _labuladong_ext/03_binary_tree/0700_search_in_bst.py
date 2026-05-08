@@ -11,10 +11,6 @@ Link: https://leetcode.cn/problems/search-in-a-binary-search-tree/
 - 节点数 1 <= n <= 5000
 - 1 <= Node.val, val <= 10^7
 
-提示
-----
-卡住超过 25 分钟再去看 03_binary_tree/NOTES.md 的「BST 关键操作」模板。
-
 复杂度（解完后填）
 ------
 时间：O(?)    空间：O(?)
