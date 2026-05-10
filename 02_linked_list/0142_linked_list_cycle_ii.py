@@ -34,7 +34,20 @@ class ListNode:
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        slow = head
+        fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                break
+        if not fast or not fast.next:
+            return None
+        slow = head
+        while slow != fast:
+            slow = slow.next
+            fast = fast.next
+        return slow
 
 
 def build_with_cycle(values, pos):
@@ -64,11 +77,13 @@ def test():
     for i, (vals, pos) in enumerate(cases, 1):
         head, expected = build_with_cycle(vals, pos)
         actual = sol.detectCycle(head)
-        ok = actual is expected     # 比较节点对象而非值
+        ok = actual is expected  # 比较节点对象而非值
         status = "PASS" if ok else "FAIL"
         exp_val = expected.val if expected else None
         act_val = actual.val if actual else None
-        print(f"[{status}] Case {i}: vals={vals!r} pos={pos}  expected_val={exp_val}  actual_val={act_val}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r} pos={pos}  expected_val={exp_val}  actual_val={act_val}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -26,17 +26,36 @@ from typing import List
 class Solution:
     def climbStairs(self, n: int) -> int:
         # TODO: 在这里写你的解法
-        pass
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        res = 0
+        c1 = 1
+        c2 = 2
+        for i in range(3, n + 1):
+            res = c1 + c2
+            c1, c2 = c2, res
+        return res
 
 
 def test():
     sol = Solution()
     cases = [
+        # LeetCode 题面 example
         (1, 1),
         (2, 2),
         (3, 3),
+        # Fibonacci 性质：f(n) = f(n-1) + f(n-2)
+        (4, 5),
         (5, 8),
+        (6, 13),
+        (7, 21),
+        # 中等
         (10, 89),
+        (20, 10946),
+        (30, 1346269),
+        # 边界最大（约束 n <= 45）
         (45, 1836311903),
     ]
     passed = 0

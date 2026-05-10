@@ -27,13 +27,29 @@ from typing import List
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        total = -float("inf")
+        i = j = 0
+        sum = 0
+        while j < len(nums):
+            sum += nums[j]
+            j += 1
+            if sum >= 0:
+                total = max(total, sum)
+                while nums[i] < 0 and j > i:
+                    sum -= nums[i]
+                    total = max(total, sum)
+                    i += 1
+            else:
+                total = max(total, sum)
+                sum = 0
+                i = j
+        return total
 
 
 def test():
     sol = Solution()
     cases = [
-        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),   # [4,-1,2,1]
+        ([-2, 1, -3, 4, -1, 2, 1, -5, 4], 6),  # [4,-1,2,1]
         ([1], 1),
         ([5, 4, -1, 7, 8], 23),
         ([-1], -1),
@@ -45,7 +61,9 @@ def test():
         actual = sol.maxSubArray(nums)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

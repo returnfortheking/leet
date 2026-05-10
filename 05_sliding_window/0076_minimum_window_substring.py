@@ -28,16 +28,41 @@ from typing import List
 
 class Solution:
     def minWindow(self, s: str, t: str) -> str:
-        # TODO: 在这里写你的解法
-        pass
+        from collections import defaultdict
+
+        dic_s = defaultdict(int)
+        dic_t = defaultdict(int)
+
+        for c in t:
+            dic_t[c] += 1
+        l = 0
+        res = ""
+        min_len = len(s) + 1
+
+        def contain(a: dict, b: dict) -> bool:
+            for k in b:
+                if a[k] < b[k]:
+                    return False
+            return True
+
+        for r in range(len(s)):
+            dic_s[s[r]] += 1
+            while contain(dic_s, dic_t):
+                if r - l + 1 < min_len:
+                    res = s[l : r + 1]
+                    min_len = r - l + 1
+                dic_s[s[l]] -= 1
+                l += 1
+        return res
 
 
 def test():
     sol = Solution()
     # 多个有效答案：用 (s, t, 期望长度) 验证；并校验 actual 含 t 全部字符
     from collections import Counter
+
     cases = [
-        ("ADOBECODEBANC", "ABC", 4),    # "BANC"
+        ("ADOBECODEBANC", "ABC", 4),  # "BANC"
         ("a", "a", 1),
         ("a", "aa", 0),
         ("ab", "b", 1),
@@ -52,11 +77,13 @@ def test():
             ok = (
                 isinstance(actual, str)
                 and len(actual) == expected_len
-                and not (Counter(t) - Counter(actual))     # 覆盖
-                and actual in s                            # 是 s 的子串
+                and not (Counter(t) - Counter(actual))  # 覆盖
+                and actual in s  # 是 s 的子串
             )
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: s={s!r} t={t!r}  expected_len={expected_len}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: s={s!r} t={t!r}  expected_len={expected_len}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

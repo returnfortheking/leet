@@ -28,7 +28,10 @@ from typing import List
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        res = 0
+        for num in nums:
+            res ^= num
+        return res
 
 
 def test():
@@ -45,7 +48,9 @@ def test():
         actual = sol.singleNumber(list(nums))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

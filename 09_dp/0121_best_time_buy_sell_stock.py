@@ -28,24 +28,49 @@ from typing import List
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        n = len(prices)
+        res = 0
+        prev = prices[0]
+        for i in range(1, n):
+            res = max(res, prices[i] - prev)
+            prev = min(prev, prices[i])
+        return res
 
 
 def test():
     sol = Solution()
     cases = [
-        ([7, 1, 5, 3, 6, 4], 5),
-        ([7, 6, 4, 3, 1], 0),
-        ([1], 0),
-        ([2, 4, 1], 2),
+        # LeetCode 题面 example
+        ([7, 1, 5, 3, 6, 4], 5),  # buy@1 sell@6
+        ([7, 6, 4, 3, 1], 0),  # 严格降，无利润
+        # 尺寸边界
+        ([1], 0),  # 单元素无法交易
+        ([5], 0),
+        # 严格升 / 严格降
+        ([1, 2, 3, 4, 5], 4),  # 买最早卖最晚
+        ([5, 4, 3, 2, 1], 0),
+        # 全相同
+        ([3, 3, 3], 0),
+        # 仅两元素
+        ([1, 5], 4),  # 升
+        ([5, 1], 0),  # 降
+        # V 型 / 倒 V
+        ([3, 1, 5], 4),  # 谷在中间
+        ([1, 5, 3], 4),  # 顶在中间
+        # 多波动单次约束
+        ([2, 4, 1, 3], 2),  # max(4-2, 3-1) = 2
         ([3, 2, 6, 5, 0, 3], 4),
+        # 起点后才出现最低
+        ([1, 100, 1, 100], 99),  # 0买100卖 vs 后面同样
     ]
     passed = 0
     for i, (prices, expected) in enumerate(cases, 1):
         actual = sol.maxProfit(prices)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: prices={prices!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: prices={prices!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

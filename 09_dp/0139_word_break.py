@@ -29,27 +29,67 @@ from typing import List
 
 
 class Solution:
+    # def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+    #     # TODO: 在这里写你的解法
+    #     n = len(s)
+    #     dp = [False] * (n + 1)
+    #     dp[0] = True
+    #     for i in range(1, n + 1):
+    #         for w in wordDict:
+    #             wl = len(w)
+    #             if wl <= i and s[i - wl : i] == w:
+    #                 dp[i] = dp[i - wl] or dp[i]
+    #     return dp[n]
     def wordBreak(self, s: str, wordDict: List[str]) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        n = len(s)
+        dp = [False] * (n + 1)
+        dp[0] = True
+        for i in range(1, n + 1):
+            for w in wordDict:
+                wl = len(w)
+                if wl <= i:
+                    flag = s[i - wl : i] == w
+                    dp[i] = dp[i] or (flag and dp[i - wl])
+        return dp[n]
 
 
 def test():
     sol = Solution()
     cases = [
+        # LeetCode 题面 example
         (("leetcode", ["leet", "code"]), True),
         (("applepenapple", ["apple", "pen"]), True),
         (("catsandog", ["cats", "dog", "sand", "and", "cat"]), False),
+        # 尺寸边界
         (("a", ["a"]), True),
-        (("ab", ["a"]), False),
-        (("aaaaaaa", ["aaaa", "aaa"]), True),
+        (("a", ["b"]), False),
+        (("a", ["aa"]), False),                    # word 比 s 长
+        # ★ 杀手用例：dp[i] 误用 OR（and/or 嵌套写错）会错答 True
+        (("ab", ["a"]), False),                    # 前缀能拆但末段 'b' 不在 dict
+        (("ab", ["a", "c"]), False),               # 同上更明显
+        (("aaab", ["a"]), False),                  # 多步前缀拆通但末段 'b' 不在
+        # word 整段
+        (("abc", ["abc"]), True),
+        (("abc", ["abcd"]), False),
+        # word 重复使用（完全背包特性）
+        (("aaaaaaa", ["aaaa", "aaa"]), True),      # 4+3
+        (("aaa", ["a"]), True),                    # 同 word 三次
+        (("aaa", ["aa"]), False),                  # 长度对不上
+        (("aaaa", ["aa"]), True),                  # 长度对得上
+        # 多 word 必须组合
+        (("ab", ["a", "b"]), True),
+        # 长答案需要回溯（贪心选错短词会失败）
+        (("pineapplepenapple", ["apple", "pen", "applepen", "pine", "pineapple"]), True),
     ]
     passed = 0
     for i, (args, expected) in enumerate(cases, 1):
         actual = sol.wordBreak(args[0], list(args[1]))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

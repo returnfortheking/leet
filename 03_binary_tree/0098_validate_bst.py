@@ -61,12 +61,27 @@ def build_tree(vals):
 def test():
     sol = Solution()
     cases = [
+        # LeetCode 题面 example
         ([2, 1, 3], True),
         ([5, 1, 4, None, None, 3, 6], False),
-        ([1], True),
-        ([5, 4, 6, None, None, 3, 7], False),    # 经典坑：3 在 6 的左子树但 < 5
+        # 尺寸边界
+        ([1], True),                            # 单节点
+        # ★ 经典坑：3 在 6 的左子树但 < 5（祖父约束，仅看父节点会误判 True）
+        ([5, 4, 6, None, None, 3, 7], False),
+        # 严格 < 不允许等值
         ([2, 2, 2], False),
         ([1, 1], False),
+        # 边界值（int 上下限）
+        ([2147483647], True),
+        ([-2147483648], True),
+        # 完全合法 BST
+        ([10, 5, 15, 3, 7, 12, 20], True),
+        # 子树整体违反根约束
+        ([10, 5, 15, 3, 12, 6, 20], False),     # 12 在 5 右下方但 > 10
+        # 极端单边链合法
+        ([1, None, 2, None, 3], True),
+        # 极端单边链违反
+        ([3, None, 2, None, 1], False),
     ]
     passed = 0
     for i, (vals, expected) in enumerate(cases, 1):

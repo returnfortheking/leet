@@ -27,18 +27,47 @@ from typing import List
 class Solution:
     def numSquares(self, n: int) -> int:
         # TODO: 在这里写你的解法
-        pass
+        sq = []
+        for i in range(1, n + 1):
+            if i * i > n:
+                break
+            sq.append(i * i)
+        dp = [n + 1] * (n + 1)
+        dp[0] = 0
+        for i in range(1, n + 1):
+            for s in sq:
+                if s <= i:
+                    dp[i] = min(dp[i], dp[i - s] + 1)
+        return dp[n]
 
 
 def test():
     sol = Solution()
     cases = [
-        (12, 3),    # 4 + 4 + 4
-        (13, 2),    # 4 + 9
-        (1, 1),
+        # LeetCode 题面 example
+        (12, 3),                        # 4+4+4
+        (13, 2),                        # 9+4
+        # 尺寸边界
+        (1, 1),                         # 单平方数
+        (2, 2),                         # 1+1
+        (3, 3),                         # 1+1+1
+        # 完全平方（一步到位）
         (4, 1),
-        (7, 4),     # 1+1+1+4
+        (16, 1),
+        (25, 1),
         (100, 1),
+        # ★ 拉格朗日四平方和定理：n = 4^k * (8m+7) 必须 4 个
+        (7, 4),                         # 8*0+7：1+1+1+4
+        (15, 4),                        # 8*1+7：9+4+1+1
+        (23, 4),                        # 8*2+7：9+9+4+1
+        (28, 4),                        # 4*(8*0+7)：16+4+4+4
+        # 3 个平方足够（边界对照）
+        (5, 2),                         # 4+1
+        (6, 3),                         # 4+1+1
+        (8, 2),                         # 4+4
+        (32, 2),                        # 16+16
+        # 大约束
+        (9999, 4),                      # 8*1249+7
     ]
     passed = 0
     for i, (n, expected) in enumerate(cases, 1):

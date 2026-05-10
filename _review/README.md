@@ -30,6 +30,7 @@ _review/
 
 - [0005 最长回文子串](0005_longest_palindrome.md) — 第一次遇到的 Python 与 TS 差异集大成
 - [0014 最长公共前缀](0014_longest_common_prefix.md) — for 循环变量泄漏、双层 break、内置名遮蔽
+- [0322 零钱兑换](0322_coin_change.md) — `int("inf")` / `reverse()` 返 None / DP base case / `range` 半开
 
 ## 主题清单
 

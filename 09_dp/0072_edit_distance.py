@@ -34,12 +34,30 @@ class Solution:
 def test():
     sol = Solution()
     cases = [
+        # LeetCode 题面 example
         (("horse", "ros"), 3),
         (("intention", "execution"), 5),
-        (("", ""), 0),
-        (("a", ""), 1),
+        # 尺寸边界
+        (("", ""), 0),                      # 都为空
+        (("a", ""), 1),                     # 一边为空，等于另一边长度
         (("", "abc"), 3),
-        (("abc", "abc"), 0),
+        (("abc", "abc"), 0),                # 完全相同
+        # 单字符
+        (("a", "a"), 0),
+        (("a", "b"), 1),                    # 单次替换
+        # 仅插入 / 仅删除
+        (("ab", "abc"), 1),                 # 插入末尾
+        (("abc", "ab"), 1),                 # 删除末尾
+        (("ac", "abc"), 1),                 # 插入中间
+        # 全替换
+        (("abc", "def"), 3),
+        # 经典示例
+        (("kitten", "sitting"), 3),
+        # 长度差异大
+        (("a", "abcdef"), 5),
+        (("abcdef", "a"), 5),
+        # 顺序敏感（公共字符不在对应位置）
+        (("ab", "ba"), 2),
     ]
     passed = 0
     for i, (args, expected) in enumerate(cases, 1):

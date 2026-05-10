@@ -34,11 +34,31 @@ class Solution:
 def test():
     sol = Solution()
     cases = [
+        # LeetCode 题面 example
         (("abcde", "ace"), 3),
         (("abc", "abc"), 3),
         (("abc", "def"), 0),
+        # 尺寸边界
+        (("", ""), 0),
+        (("", "abc"), 0),
+        (("abc", ""), 0),
+        # 单字符
         (("a", "a"), 1),
+        (("a", "b"), 0),
+        (("a", "aaa"), 1),
+        # 反序（公共字符位置不利）
+        (("abc", "cba"), 1),
+        # 子串
+        (("abcd", "ad"), 2),
+        # 散列匹配
         (("ezupkr", "ubmrapg"), 2),
+        # ★ 经典：长公共子序列但分散
+        (("abcba", "abcbcba"), 5),
+        # 重复字符
+        (("aaaa", "aa"), 2),
+        (("aaaa", "aaaa"), 4),
+        # 长 + 仅末尾匹配
+        (("abcdefg", "g"), 1),
     ]
     passed = 0
     for i, (args, expected) in enumerate(cases, 1):
