@@ -54,10 +54,9 @@
 
 ## 顶层索引
 
-- [PYTHON_CHEATSHEET.md](PYTHON_CHEATSHEET.md) — TS 程序员的 Python 速查（强烈建议刷题前过一遍）
 - [HIGH_FREQ.md](HIGH_FREQ.md) — 高频题清单（Hot 100 主刷 + labuladong 扩展）
 - [_template/](_template/README.md) — 题解模板与使用说明
-- [_review/](_review/README.md) — 开发踩坑复盘（持续累积）
+- [_review/](_review/README.md) — Python 三件套：踩坑 + 简写 + 数据结构 CRUD 速查
 - [_labuladong_ext/](_labuladong_ext/) — labuladong 扩展题（二刷再说，一刷别动）
 
 ---
@@ -67,10 +66,9 @@
 ```
 leetcode/
 ├── README.md                # 本文件
-├── PYTHON_CHEATSHEET.md     # TS → Python 速查
 ├── HIGH_FREQ.md             # 高频题清单（含两区索引）
 ├── _template/               # 题解模板
-├── _review/                 # 踩坑复盘（按主题 + 按题）
+├── _review/                 # 踩坑 + Python 简写 + CRUD 速查
 ├── _labuladong_ext/         # 📚 labuladong 扩展题（二刷再说）
 │   ├── 01_array_string/
 │   └── ... 同样 16 专题分类
