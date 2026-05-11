@@ -15,7 +15,7 @@ for i in range(len(s)):
     ...
 ```
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -34,7 +34,7 @@ if pos - i >= 0 and pos + i < len(s):  # 不是 |
     ...
 ```
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -57,7 +57,7 @@ parts.append("world")
 result = " ".join(parts)
 ```
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -74,7 +74,7 @@ class Solution:
         self.odd(s, pos)   # 调用时 self 自动传，不用写
 ```
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -92,7 +92,7 @@ arr = list("abc")  # 可迭代 → list（结果 ['a','b','c']）
 
 字面量根本不需要转换：`i = 0` 就行。
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -136,7 +136,7 @@ sorted(arr)           # 返回新列表（不改原 arr）
 
 ★ **`sort()` 和 `reverse()` 返回 None**——这是 TS 转 Python 头号坑。`a = b.sort()` 后 `a` 是 None。要新列表用 `sorted(b)`。
 
-首次出现：[#0005](0005_longest_palindrome.md)
+首次出现：#0005
 
 ---
 
@@ -194,7 +194,7 @@ range(n - 1, -1, -1) # n-1, n-2, ..., 0     （倒着遍历下标）
 
 **TS 自查**：TS 的 `arr.slice(a, b)` / `str.substring(a, b)` 也是半开 `[a, b)`，但 TS 没有 `range`——靠 `for (let i = a; i < b; i++)` 写，长度概念跟 `b - a` 一致。**所以 TS 转 Python 真正的坑是 `range`，而不是切片**——切片你早适应了。
 
-首次出现：[#0005](0005_longest_palindrome.md)、[#0322](0322_coin_change.md)
+首次出现：#0005、#0322
 
 ---
 
@@ -221,7 +221,7 @@ print(s)              # 'ghi'，不是报错。s 仍然存在！
 min_len = min(len(s) for s in strs)   # s 是生成器内部局部，外面拿不到
 ```
 
-首次出现：[#0014](0014_longest_common_prefix.md)
+首次出现：#0014
 
 ---
 
@@ -262,7 +262,67 @@ for i in ...:
 
 实战中 90% 用方案 A：把双层循环包进函数，sentinel return 一了百了。
 
-首次出现：[#0014](0014_longest_common_prefix.md)
+首次出现：#0014
+
+---
+
+## dict 字面量 vs set 字面量
+
+**症状**：`TypeError: 'set' object is not subscriptable`——以为是 dict 用下标访问，结果是 set。
+**根因**：`{a, b, c}` 是 **set**，`{k: v, k: v}` 才是 **dict**。**区别就在冒号**。形似但完全不同。
+
+```python
+{("a", 1), ("b", 2)}    # set，装的是两个 tuple
+{"a": 1, "b": 2}        # dict，键值映射
+```
+
+最容易写错的场景是"括号 / 字符配对映射"——脑子里想的是"`)`→`(`"，但手抖写成 tuple 对：
+
+```python
+pair = {(")", "("), ("]", "["), ("}", "{")}   # ❌ set of tuples
+pair = {")": "(", "]": "[", "}": "{"}          # ✅ dict
+```
+
+**空字面量陷阱**：
+
+| 字面量 | 类型 |
+|---|---|
+| `{}` | **空 dict**（不是空 set！）|
+| `set()` | 空 set |
+| `dict()` | 空 dict |
+| `[]` | 空 list |
+| `()` | 空 tuple |
+
+**自查**：遇到 `'set' object is not subscriptable` 先怀疑漏冒号。键值映射永远写冒号。
+
+首次出现：#0020
+
+---
+
+## 空容器 ≠ None；判空别用 `==`
+
+**症状**：循环结束想判"栈/队列空了没"，写 `return stack == None`——结果永远 False，函数对所有正常输入都返回错的值。
+**根因**：空 list `[]` 和 `None` 是两个不同对象。Python 里"空容器"在布尔上下文里是 **falsy**（`not []` 为 True），但用 `==` 比较时它们值不相等。
+
+```python
+[] == None     # False
+[] is None     # False
+not []         # True  ✅
+len([]) == 0   # True  ✅
+bool([])       # False
+```
+
+**判空 / 判 None 速查**：
+
+| 想判 | 推荐写法 | 不推荐 |
+|---|---|---|
+| 列表/字典/集合为空 | `not x` | `x == []` / `x == None` |
+| 变量是 None | `x is None` | `x == None` |
+| 变量非 None | `x is not None` | `x != None` |
+
+**为什么 `is None` 比 `== None` 好**：`None` 是单例；`is` 快且不会被自定义 `__eq__` 干扰。PEP 8 也明确推荐 `is None`。
+
+首次出现：#0020
 
 ---
 
