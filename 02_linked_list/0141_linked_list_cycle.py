@@ -35,7 +35,15 @@ class ListNode:
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        if not head:
+            return False
+        slow = fast = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                return True
+        return False
 
 
 def from_list_with_cycle(values, pos):
@@ -67,7 +75,9 @@ def test():
         actual = sol.hasCycle(head)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r} pos={pos}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r} pos={pos}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

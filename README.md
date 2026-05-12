@@ -55,6 +55,7 @@
 ## 顶层索引
 
 - [HIGH_FREQ.md](HIGH_FREQ.md) — 高频题清单（Hot 100 主刷 + labuladong 扩展）
+- [TIME_TIERS.md](TIME_TIERS.md) — Hot 100 按耗时分档（从 T1 往下刷）
 - [_template/](_template/README.md) — 题解模板与使用说明
 - [_review/](_review/README.md) — Python 三件套：踩坑 + 简写 + 数据结构 CRUD 速查
 - [_labuladong_ext/](_labuladong_ext/) — labuladong 扩展题（二刷再说，一刷别动）

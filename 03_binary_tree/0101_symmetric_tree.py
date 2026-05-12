@@ -34,23 +34,45 @@ class TreeNode:
 class Solution:
     def isSymmetric(self, root: Optional[TreeNode]) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        if not root:
+            return True
+        res1 = [root.left]
+        res2 = [root.right]
+        while res1 and res2:
+            tmp1 = res1.pop()
+            tmp2 = res2.pop()
+            if not tmp1 and not tmp2:
+                continue
+            if not tmp1 or not tmp2:
+                return False
+            if tmp1.val != tmp2.val:
+                return False
+            res1.append(tmp1.left)
+            res1.append(tmp1.right)
+            res2.append(tmp2.right)
+            res2.append(tmp2.left)
+        if res1 or res2:
+            return False
+        return True
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -69,7 +91,9 @@ def test():
         actual = sol.isSymmetric(build_tree(vals))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -33,7 +33,16 @@ class ListNode:
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        if not head or not head.next:
+            return head
+        pre, cur, nxt = None, head, head.next
+        while cur:
+            cur.next = pre
+            pre = cur
+            cur = nxt
+            if nxt != None:
+                nxt = nxt.next
+        return pre
 
 
 # ----- 链表辅助函数（测试用，不要改） -------------------------------------
@@ -68,7 +77,9 @@ def test():
         actual = to_list(s.reverseList(head))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: input={input_vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: input={input_vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -32,9 +32,26 @@ class ListNode:
 
 
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    def mergeTwoLists(
+        self, list1: Optional[ListNode], list2: Optional[ListNode]
+    ) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        head = ListNode(0)
+        curr = head
+        while list1 and list2:
+            if list1.val <= list2.val:
+                curr.next = list1
+                list1 = list1.next
+                curr = curr.next
+            else:
+                curr.next = list2
+                list2 = list2.next
+                curr = curr.next
+        if list1:
+            curr.next = list1
+        if list2:
+            curr.next = list2
+        return head.next
 
 
 def to_list(head):
@@ -68,7 +85,9 @@ def test():
         actual = to_list(sol.mergeTwoLists(from_list(a), from_list(b)))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: a={a!r} b={b!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: a={a!r} b={b!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

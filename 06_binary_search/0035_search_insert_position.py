@@ -30,7 +30,17 @@ from typing import List
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
         # TODO: 在这里写你的解法
-        pass
+        l = 0
+        r = len(nums) - 1
+        while l <= r:
+            mid = (int)(l + (r - l) / 2)
+            if nums[mid] == target:
+                return mid
+            elif nums[mid] > target:
+                r = mid - 1
+            elif nums[mid] < target:
+                l = mid + 1
+        return l
 
 
 def test():
@@ -48,7 +58,9 @@ def test():
         actual = sol.searchInsert(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

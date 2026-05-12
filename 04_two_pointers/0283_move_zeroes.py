@@ -29,7 +29,17 @@ class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         """原地修改 nums。"""
         # TODO: 在这里写你的解法
-        pass
+        i = j = 0
+        for i in range(len(nums)):
+            while nums[i] != 0:
+                i += 1
+            j = i + 1
+            if j >= len(nums):
+                return
+            while nums[j] == 0:
+                j += 1
+
+            nums[i], nums[j] = nums[j], nums[i]
 
 
 def test():
@@ -48,7 +58,9 @@ def test():
         sol.moveZeroes(nums_copy)
         ok = nums_copy == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={nums_copy!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={nums_copy!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

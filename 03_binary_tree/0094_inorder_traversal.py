@@ -34,23 +34,36 @@ class TreeNode:
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        res = []
+
+        def dfs(root):
+            if not root:
+                return
+            dfs(root.left)
+            res.append(root.val)
+            dfs(root.right)
+
+        dfs(root)
+        return res
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -81,7 +94,9 @@ def test():
         actual = sol.inorderTraversal(build_tree(vals))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

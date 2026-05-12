@@ -37,12 +37,11 @@ from typing import List
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         map = {}
-        i = 0
-        for num in nums:
+        for i, num in enumerate(nums):
             if map.get(target - num, None) is not None:
                 return [map[target - num], i]
             map[num] = i
-            i = i + 1
+            i += 1
         return []  # 题目保证有解；这行只是让类型检查器闭嘴
 
 
