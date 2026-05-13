@@ -31,14 +31,13 @@ class Solution:
         # TODO: 在这里写你的解法
         i = j = 0
         for i in range(len(nums)):
-            while nums[i] != 0:
+            while i < len(nums) and nums[i] != 0:
                 i += 1
             j = i + 1
+            while j < len(nums) and nums[j] == 0:
+                j += 1
             if j >= len(nums):
                 return
-            while nums[j] == 0:
-                j += 1
-
             nums[i], nums[j] = nums[j], nums[i]
 
 

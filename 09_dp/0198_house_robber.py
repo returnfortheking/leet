@@ -42,6 +42,16 @@ class Solution:
                 dp[i][1] = nums[i - 1]
         return max(dp[n - 1][0], dp[n - 1][1])
 
+    def rob2(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return 0
+        dp = [0] * n
+        dp[0] = nums[0]
+        for i in range(1, n):
+            dp[i] = max(dp[i - 1], (dp[i - 2] if i >= 2 else 0) + nums[i])
+        return dp[-1]
+
 
 def test():
     sol = Solution()

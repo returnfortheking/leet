@@ -35,7 +35,21 @@ class TreeNode:
 class Solution:
     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        if not root:
+            return 0
+        res = 0
+
+        def maxDepth(node: Optional[TreeNode]) -> int:
+            nonlocal res
+            if not node:
+                return 0
+            l = maxDepth(node.left)
+            r = maxDepth(node.right)
+            res = max(res, l + r)
+            return max(l, r) + 1
+
+        maxDepth(root)
+        return res
 
 
 # ----- 树辅助：根据 LeetCode 风格的 list 构建（None 占位，测试用，不要改） -----
@@ -43,6 +57,7 @@ def build_tree(vals: List[Optional[int]]) -> Optional[TreeNode]:
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
@@ -74,7 +89,9 @@ def test():
         actual = s.diameterOfBinaryTree(root)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
