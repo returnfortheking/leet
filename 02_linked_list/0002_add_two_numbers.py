@@ -33,9 +33,25 @@ class ListNode:
 
 
 class Solution:
-    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+    def addTwoNumbers(
+        self, l1: Optional[ListNode], l2: Optional[ListNode]
+    ) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        hair = tail = ListNode(0)
+        carry = 0
+        while l1 or l2 or carry > 0:
+            v1 = 0 if not l1 else l1.val
+            v2 = 0 if not l2 else l2.val
+            tmp = carry + v1 + v2
+            carry, num = divmod(tmp, 10)
+            curr = ListNode(num)
+            tail.next = curr
+            tail = curr
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+        return hair.next
 
 
 def to_list(head):
@@ -58,7 +74,7 @@ def from_list(values):
 def test():
     sol = Solution()
     cases = [
-        (([2, 4, 3], [5, 6, 4]), [7, 0, 8]),       # 342 + 465 = 807
+        (([2, 4, 3], [5, 6, 4]), [7, 0, 8]),  # 342 + 465 = 807
         (([0], [0]), [0]),
         (([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9]), [8, 9, 9, 9, 0, 0, 0, 1]),
         (([1], [9, 9, 9, 9]), [0, 0, 0, 0, 1]),
@@ -69,7 +85,9 @@ def test():
         actual = to_list(sol.addTwoNumbers(from_list(a), from_list(b)))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: a={a!r} b={b!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: a={a!r} b={b!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

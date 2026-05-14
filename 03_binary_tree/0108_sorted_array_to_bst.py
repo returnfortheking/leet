@@ -36,25 +36,45 @@ class TreeNode:
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
         # TODO: 在这里写你的解法
-        pass
+        if not nums:
+            return None
+
+        def buildBST(nums: List[int], l: int, r: int) -> Optional[TreeNode]:
+            if l > r:
+                return None
+            mid = (l + r) // 2
+            root = TreeNode(nums[mid])
+            root.left = buildBST(nums, l, mid - 1)
+            root.right = buildBST(nums, mid + 1, r)
+            return root
+
+        root = buildBST(nums, 0, len(nums) - 1)
+        return root
 
 
 def inorder(root):
     out = []
+
     def dfs(node):
-        if not node: return
-        dfs(node.left); out.append(node.val); dfs(node.right)
+        if not node:
+            return
+        dfs(node.left)
+        out.append(node.val)
+        dfs(node.right)
+
     dfs(root)
     return out
 
 
 def height(root):
-    if not root: return 0
+    if not root:
+        return 0
     return 1 + max(height(root.left), height(root.right))
 
 
 def is_balanced(root):
-    if not root: return True
+    if not root:
+        return True
     h_diff = abs(height(root.left) - height(root.right))
     return h_diff <= 1 and is_balanced(root.left) and is_balanced(root.right)
 
@@ -74,7 +94,9 @@ def test():
         root = sol.sortedArrayToBST(list(nums))
         ok = inorder(root) == sorted(nums) and is_balanced(root)
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  inorder={inorder(root)}  balanced={is_balanced(root)}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  inorder={inorder(root)}  balanced={is_balanced(root)}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

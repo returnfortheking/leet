@@ -29,7 +29,36 @@ from typing import List
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         # TODO: 在这里写你的解法
-        pass
+        if not digits:
+            return []
+        dic = {
+            "2": "abc",
+            "3": "def",
+            "4": "ghi",
+            "5": "jkl",
+            "6": "mno",
+            "7": "pqrs",
+            "8": "tuv",
+            "9": "wxyz",
+        }
+        res = []
+        tmp = []
+
+        def backtrack(pos: int):
+            if pos > len(digits):
+                return
+            if pos == len(digits):
+                res.append("".join(tmp))
+                return
+            digit = digits[pos]
+            s = dic[digit]
+            for chr in s:
+                tmp.append(chr)
+                backtrack(pos + 1)
+                tmp.pop()
+
+        backtrack(0)
+        return res
 
 
 def test():
@@ -45,7 +74,9 @@ def test():
         actual = sol.letterCombinations(digits)
         ok = actual is not None and sorted(actual) == sorted(expected)
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: digits={digits!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}")
+        print(
+            f"[{status}] Case {i}: digits={digits!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

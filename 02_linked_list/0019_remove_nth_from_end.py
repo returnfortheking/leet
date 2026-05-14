@@ -36,7 +36,17 @@ class ListNode:
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        slow = fast = head
+        slow = ListNode(0)
+        slow.next = head
+        dummy = slow
+        for _ in range(n - 1):
+            fast = fast.next
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+        slow.next = slow.next.next
+        return dummy.next
 
 
 def to_list(head):
@@ -70,7 +80,9 @@ def test():
         actual = to_list(sol.removeNthFromEnd(from_list(vals), n))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r} n={n}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r} n={n}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
