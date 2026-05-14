@@ -444,6 +444,37 @@ flag = bool(value)                 # 大多数时候不需要——Python 的 if
 
 ---
 
+## ★ list / iterable → str 用 `"".join()`，**没有 `.to_str()`**
+
+```python
+chars = ['a', 'b', 'c']
+chars.to_str()              # ❌ AttributeError —— list 没这方法
+chars.to_string()           # ❌ 同样不存在
+str(chars)                  # ❌ 是 "['a', 'b', 'c']"，不是 "abc"
+"".join(chars)              # ✓ "abc"
+",".join(chars)             # ✓ "a,b,c"
+```
+
+**心法**：`join` 是**字符串方法**，由**分隔符**调用，参数是可迭代物：
+
+```python
+sep.join(iterable)          # 用 sep 把 iterable 里的字符串拼起来
+```
+
+注意 `iterable` 里每个元素必须是 `str`，整数 / list 等需要先转：
+
+```python
+"-".join([1, 2, 3])         # ❌ TypeError
+"-".join(map(str, [1, 2, 3]))   # ✓ "1-2-3"
+"-".join(str(x) for x in [1, 2, 3])   # ✓ 同上
+```
+
+**TS 对照**：TS 是 `[1,2,3].join("-")`——动词归数组。Python 反过来，**动词归分隔符字符串**。
+
+首次出现：#0017 电话号码字母组合
+
+---
+
 ## ★ `defaultdict` — 不用手动初始化字典 key
 
 ```python
