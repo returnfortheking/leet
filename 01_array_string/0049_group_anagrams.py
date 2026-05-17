@@ -23,24 +23,44 @@ Link: https://leetcode.cn/problems/group-anagrams/
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
+import collections
 from typing import List
 
 
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         # TODO: 在这里写你的解法
-        pass
+        dic = {}
+        res = []
+        for str in strs:
+            tmp = tuple(sorted(str))
+            if tmp not in dic:
+                dic[tmp] = len(res)
+                res.append([str])
+            else:
+                res[dic[tmp]].append(str)
+        return res
+
+    def groupAnagrams2(self, strs: List[str]) -> List[List[str]]:
+        # TODO: 在这里写你的解法
+        mp = collections.defaultdict(list)
+        res = []
+        for str in strs:
+            key = "".join(sorted(str))
+            mp[key].append(str)
+        return list(mp.values())
 
 
 def test():
     sol = Solution()
     cases = [
-        (["eat", "tea", "tan", "ate", "nat", "bat"],
-         [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]]),
+        (
+            ["eat", "tea", "tan", "ate", "nat", "bat"],
+            [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+        ),
         ([""], [[""]]),
         (["a"], [["a"]]),
-        (["abc", "bca", "cab", "xyz", "zyx"],
-         [["abc", "bca", "cab"], ["xyz", "zyx"]]),
+        (["abc", "bca", "cab", "xyz", "zyx"], [["abc", "bca", "cab"], ["xyz", "zyx"]]),
     ]
     passed = 0
     for i, (strs, expected) in enumerate(cases, 1):
@@ -50,7 +70,9 @@ def test():
         norm_e = sorted(sorted(g) for g in expected)
         ok = norm_a == norm_e
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: strs={strs!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: strs={strs!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -30,6 +30,37 @@ class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
         # TODO: 在这里写你的解法
         pass
+        l = 0
+        r = len(nums) - 1
+        mid = 0
+        res = []
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] > target:
+                r = mid - 1
+            elif nums[mid] < target:
+                l = mid + 1
+            elif nums[mid] == target:
+                if mid >= 1 and nums[mid] == nums[mid - 1]:
+                    r = mid - 1
+                else:
+                    break
+        res.append(l if l < len(nums) and nums[l] == target else -1)
+        l = 0
+        r = len(nums) - 1
+        while l <= r:
+            mid = (l + r) // 2
+            if nums[mid] > target:
+                r = mid - 1
+            elif nums[mid] < target:
+                l = mid + 1
+            elif nums[mid] == target:
+                if mid <= len(nums) - 2 and nums[mid] == nums[mid + 1]:
+                    l = mid + 1
+                else:
+                    break
+        res.append(mid if mid < len(nums) and nums[mid] == target else -1)
+        return res
 
 
 def test():
@@ -48,7 +79,9 @@ def test():
         actual = s.searchRange(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -27,7 +27,11 @@ from typing import List
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         # TODO: 在这里写你的解法
-        pass
+        dp = [[1] * n for _ in range(m)]
+        for i in range(1, m):
+            for j in range(1, n):
+                dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+        return dp[m - 1][n - 1]
 
 
 def test():
@@ -37,25 +41,27 @@ def test():
         ((3, 7), 28),
         ((3, 2), 3),
         # 尺寸边界
-        ((1, 1), 1),                        # 起点 = 终点
-        ((1, 10), 1),                       # 单行只有一种走法
-        ((10, 1), 1),                       # 单列同上
-        ((2, 2), 2),                        # 最简 2x2
+        ((1, 1), 1),  # 起点 = 终点
+        ((1, 10), 1),  # 单行只有一种走法
+        ((10, 1), 1),  # 单列同上
+        ((2, 2), 2),  # 最简 2x2
         # 对称性验证（C(m+n-2, m-1) 对称）
-        ((7, 3), 28),                       # = (3, 7)
-        ((12, 23), 193536720),              # = (23, 12)
+        ((7, 3), 28),  # = (3, 7)
+        ((12, 23), 193536720),  # = (23, 12)
         # 中等大小
-        ((10, 10), 48620),                  # C(18, 9)
+        ((10, 10), 48620),  # C(18, 9)
         ((23, 12), 193536720),
         # 大网格（Python 任意精度，DP 不会溢出）
-        ((20, 20), 35345263800),            # C(38, 19)
+        ((20, 20), 35345263800),  # C(38, 19)
     ]
     passed = 0
     for i, (args, expected) in enumerate(cases, 1):
         actual = sol.uniquePaths(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
