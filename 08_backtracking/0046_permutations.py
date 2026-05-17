@@ -28,16 +28,41 @@ from typing import List
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         # TODO: 在这里写你的解法
-        pass
+        n = len(nums)
+        used = [False] * n
+        res = []
+        tmp = []
+
+        def back():
+            if len(tmp) == n:
+                res.append(list(tmp))
+                return
+            for i in range(n):
+                if not used[i]:
+                    tmp.append(nums[i])
+                    used[i] = True
+                    back()
+                    tmp.pop()
+                    used[i] = False
+
+        back()
+        return res
 
 
 def test():
     sol = Solution()
     cases = [
-        ([1, 2, 3], [
-            [1, 2, 3], [1, 3, 2], [2, 1, 3],
-            [2, 3, 1], [3, 1, 2], [3, 2, 1],
-        ]),
+        (
+            [1, 2, 3],
+            [
+                [1, 2, 3],
+                [1, 3, 2],
+                [2, 1, 3],
+                [2, 3, 1],
+                [3, 1, 2],
+                [3, 2, 1],
+            ],
+        ),
         ([0, 1], [[0, 1], [1, 0]]),
         ([1], [[1]]),
     ]
@@ -47,7 +72,9 @@ def test():
         ok = actual is not None and sorted(actual) == sorted(expected)
         status = "PASS" if ok else "FAIL"
         n_actual = len(actual) if actual is not None else 0
-        print(f"[{status}] Case {i}: nums={nums!r}  count_expected={len(expected)}  count_actual={n_actual}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  count_expected={len(expected)}  count_actual={n_actual}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

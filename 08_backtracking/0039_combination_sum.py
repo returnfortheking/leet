@@ -31,7 +31,26 @@ from typing import List
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
         # TODO: 在这里写你的解法
-        pass
+        res = []
+        tmp = []
+        sum = 0
+
+        def back(i: int):
+            nonlocal sum
+            if sum == target:
+                res.append(list(tmp))
+                return
+            if sum > target:
+                return
+            for i in range(i, len(candidates)):
+                tmp.append(candidates[i])
+                sum += candidates[i]
+                back(i)
+                tmp.pop()
+                sum -= candidates[i]
+
+        back(0)
+        return list(res)
 
 
 def test():
@@ -50,7 +69,9 @@ def test():
         norm_e = sorted(sorted(c) for c in expected)
         ok = norm_a == norm_e
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

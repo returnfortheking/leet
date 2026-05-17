@@ -29,7 +29,30 @@ from typing import List
 class Solution:
     def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
         # TODO: 在这里写你的解法
-        pass
+        res = []
+        tmp = []
+        sum = 0
+        candidates.sort()
+
+        def back(pos: int):
+            nonlocal sum
+            if sum == target:
+                res.append(list(tmp))
+                return
+
+            for i in range(pos, len(candidates)):
+                if i > pos and candidates[i] == candidates[i - 1]:
+                    continue
+                if sum > target:
+                    break
+                tmp.append(candidates[i])
+                sum += candidates[i]
+                back(i + 1)
+                sum -= candidates[i]
+                tmp.pop()
+
+        back(0)
+        return res
 
 
 def test():
@@ -47,7 +70,9 @@ def test():
         norm_e = sorted(sorted(c) for c in expected)
         ok = norm_a == norm_e
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

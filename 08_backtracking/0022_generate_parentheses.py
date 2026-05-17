@@ -27,7 +27,24 @@ from typing import List
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         # TODO: 在这里写你的解法
-        pass
+        res = []
+        tmp = []
+
+        def back(l: int, r: int):
+            if len(tmp) == n * 2:
+                res.append("".join(tmp))
+                return
+            if l < n:
+                tmp.append("(")
+                back(l + 1, r)
+                tmp.pop()
+            if r < l:
+                tmp.append(")")
+                back(l, r + 1)
+                tmp.pop()
+
+        back(0, 0)
+        return res
 
 
 def test():
@@ -42,7 +59,9 @@ def test():
         actual = sol.generateParenthesis(n)
         ok = actual is not None and sorted(actual) == sorted(expected)
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: n={n}  count_e={len(expected)}  count_a={len(actual) if actual else 0}")
+        print(
+            f"[{status}] Case {i}: n={n}  count_e={len(expected)}  count_a={len(actual) if actual else 0}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

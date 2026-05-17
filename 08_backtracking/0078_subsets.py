@@ -29,7 +29,21 @@ from typing import List
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
         # TODO: 在这里写你的解法
-        pass
+        tmp = []
+        res = []
+        n = len(nums)
+
+        def back(pos: int):
+            if pos == n:
+                res.append(list(tmp))
+                return
+            tmp.append(nums[pos])
+            back(pos + 1)
+            tmp.pop()
+            back(pos + 1)
+
+        back(0)
+        return res
 
 
 def test():
@@ -46,7 +60,9 @@ def test():
         norm_e = sorted(sorted(s) for s in expected)
         ok = norm_a == norm_e
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  count_e={len(expected)}  count_a={len(actual) if actual else 0}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

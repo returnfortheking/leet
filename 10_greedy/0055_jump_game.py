@@ -28,7 +28,13 @@ from typing import List
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        n = len(nums)
+        pos = 0
+        for i, x in enumerate(nums):
+            if pos < i:
+                return False
+            pos = max(pos, i + x)
+        return pos >= n - 1
 
 
 def test():
@@ -46,7 +52,9 @@ def test():
         actual = sol.canJump(nums)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

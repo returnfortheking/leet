@@ -83,7 +83,39 @@ return res                             # ❌ 没 backtrack(0)，res 永远 []
 
 **修**：`return res` 前加 `backtrack(0)`。
 
-### T2. 选项遍历多套了一层
+### T2. 组合题忘了 `start` 起点 → 退化成全排列
+
+组合 pick 模板（Flavor A）的灵魂是 **`for i in range(start, n)`**——靠 `start` 单调递增防止 [a,b] 和 [b,a] 都被收集。
+
+```python
+def back(start, ...):
+    for i in range(start, len(candidates)):    # ✓ 防重
+        tmp.append(candidates[i])
+        back(i, remaining - ...)               # 0039 允许复用：back(i)
+        # back(i + 1, ...)                     # 0040 不许重复：back(i+1)
+        tmp.pop()
+```
+
+**错版**：
+
+```python
+for i in range(len(candidates)):               # ❌ 每次从 0 开始 → 出现重复组合
+```
+
+去掉 start 起点等于退化到 **Flavor D（全排列）** 的语义——[2, 3] 和 [3, 2] 会被当成两组。
+
+**错例**：#0039 组合总和 第一版
+
+**辨别口诀**：
+
+| 题 | 防重机制 |
+|---|---|
+| Flavor A 组合 / 子集 | `for i in range(start, n)` —— start 单调递增 |
+| Flavor D 全排列 | `for i in range(n) if not used[i]` —— visited 集合 |
+
+两个模板**外壳都是 for i**，灵魂全在 **`start` 还是 `used`**。看到组合题先认 start，看到排列题先认 used。
+
+### T3. 选项遍历多套了一层
 
 当前位的选项 = `dic[digits[pos]]`，直接对它遍历。如果先 `cur = digits[pos]` 再 `for c in cur`，cur 是单字符，外层循环只跑一次纯属冗余。
 
