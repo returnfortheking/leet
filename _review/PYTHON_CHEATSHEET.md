@@ -574,12 +574,40 @@ dict(zip(keys, values))         # → 两个 list 配对建 dict
 
 ```python
 sorted("cba")           # → ['a','b','c']   ⚠ 字符 list，不是 str
-"".join(sorted(s))      # → 排序后字符串
-tuple(sorted(s))        # → 可作 dict key
+"".join(sorted(s))      # → "abc"           排序后字符串
+tuple(sorted(s))        # → ('a','b','c')   排序后 tuple（可作 dict key）
 
-# 异位词判同
+# 异位词判同（哪个都行）
 "".join(sorted(s1)) == "".join(sorted(s2))
+tuple(sorted(s1)) == tuple(sorted(s2))
 ```
+
+### Hashable 类型一览（什么能当 dict key / set 元素）★
+
+`sorted(s)` 返回的是 **list**——而 **list 不能当 dict key**！必须先转 `tuple` 或 `str`。
+
+| 类型 | 能 hash？ | 为啥 |
+|---|---|---|
+| `int` `float` `bool` `None` | ✓ | 不可变 |
+| `str` | ✓ | 不可变 |
+| `tuple`（元素全 hashable）| ✓ | 不可变 |
+| `frozenset` | ✓ | 不可变 |
+| **`list`** | **❌** | 可变 → TypeError: unhashable type |
+| **`dict`** | **❌** | 可变 |
+| **`set`** | **❌** | 可变 |
+
+```python
+# 想用"排序后的字符序列"当 dict key 的两种合法路子
+d[tuple(sorted(s))] = ...      # tuple，省一次 join
+d["".join(sorted(s))] = ...    # str，print 时更可读
+
+# ❌ 不能直接：
+d[sorted(s)] = ...             # TypeError: unhashable type: 'list'
+```
+
+**心法**：**"我想用 X 作 dict key / set 元素"** → 先检查 X 是不是 hashable。
+- 是 → 直接用
+- 否（list / dict / set） → 转 tuple / frozenset / json 字符串
 
 ### 数值转换汇总
 

@@ -30,7 +30,25 @@ class Solution:
     def sortColors(self, nums: List[int]) -> None:
         """原地修改 nums。"""
         # TODO: 在这里写你的解法
-        pass
+        n = len(nums)
+        l = 0
+        r = n - 1
+        while l < r:
+            while l < r and nums[l] == 0:
+                l += 1
+            while r > l and nums[r] != 0:
+                r -= 1
+            if l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+        l = 0
+        r = n - 1
+        while l < r:
+            while l < r and nums[l] != 2:
+                l += 1
+            while l < r and nums[r] == 2:
+                r -= 1
+            if l < r:
+                nums[l], nums[r] = nums[r], nums[l]
 
 
 def test():
@@ -49,7 +67,9 @@ def test():
         sol.sortColors(nums_copy)
         ok = nums_copy == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={nums_copy!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={nums_copy!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
