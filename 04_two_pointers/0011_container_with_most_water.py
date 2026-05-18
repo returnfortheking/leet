@@ -29,7 +29,19 @@ from typing import List
 class Solution:
     def maxArea(self, height: List[int]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        l = 0
+        r = len(height) - 1
+        res = 0
+        while l < r:
+            hl = height[l]
+            hr = height[r]
+            if hl <= hr:
+                res = max(res, (r - l) * hl)
+                l += 1
+            else:
+                res = max(res, (r - l) * hr)
+                r -= 1
+        return res
 
 
 def test():
@@ -46,7 +58,9 @@ def test():
         actual = sol.maxArea(h)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: height={h!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: height={h!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

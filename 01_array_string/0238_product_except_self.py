@@ -30,7 +30,17 @@ from typing import List
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        n = len(nums)
+        pre = [1] * n
+        tmp = 1
+        for i in range(0, n - 1):
+            pre[i] = tmp * nums[i]
+            tmp = pre[i]
+        tmp = 1
+        for i in range(0, n):
+            pre[n - i - 1] = tmp * (pre[n - i - 2] if n - i - 2 >= 0 else 1)
+            tmp = tmp * nums[n - i - 1]
+        return pre
 
 
 def test():
@@ -47,7 +57,9 @@ def test():
         actual = sol.productExceptSelf(list(nums))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

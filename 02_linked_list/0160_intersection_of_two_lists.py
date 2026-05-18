@@ -33,9 +33,30 @@ class ListNode:
 
 
 class Solution:
-    def getIntersectionNode(self, headA: Optional[ListNode], headB: Optional[ListNode]) -> Optional[ListNode]:
+    def getIntersectionNode(
+        self, headA: Optional[ListNode], headB: Optional[ListNode]
+    ) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        if not headA or not headB:
+            return None
+        x = headA
+        y = headB
+        hasA = True
+        hasB = True
+        while x and y:
+            if x == y:
+                return x
+            else:
+                x = x.next
+                y = y.next
+            if (not x) and (not y):
+                return None
+            elif not x and hasB:
+                x = headB
+            elif not y and hasA:
+                y = headA
+
+        return None
 
 
 def build_intersection(a_only, b_only, common):
@@ -73,8 +94,8 @@ def test():
         # (a_only, b_only, common)
         ([4, 1], [5, 6, 1], [8, 4, 5]),
         ([1, 9, 1], [3], [2, 4]),
-        ([2, 6, 4], [1, 5], []),                # 不相交
-        ([], [], [1, 2, 3]),                    # 完全重合
+        ([2, 6, 4], [1, 5], []),  # 不相交
+        ([], [], [1, 2, 3]),  # 完全重合
         ([1], [], [3]),
     ]
     passed = 0
@@ -85,7 +106,9 @@ def test():
         status = "PASS" if ok else "FAIL"
         exp_v = expected.val if expected else None
         act_v = actual.val if actual else None
-        print(f"[{status}] Case {i}: a={a} b={b} common={c}  expected_val={exp_v}  actual_val={act_v}")
+        print(
+            f"[{status}] Case {i}: a={a} b={b} common={c}  expected_val={exp_v}  actual_val={act_v}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -34,7 +34,33 @@ class ListNode:
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        tmp = []
+        while head:
+            tmp.append(head.val)
+            head = head.next
+
+        def isPalindormeList() -> bool:
+            n = len(tmp)
+            mid = n // 2
+            i = 0
+            res = True
+            if n % 2 == 1:
+                while i <= mid and mid + i < n:
+                    if tmp[mid - i] == tmp[mid + i]:
+                        i += 1
+                    else:
+                        res = False
+                        break
+            else:
+                while i <= mid and 0 <= mid + i - 1 < n:
+                    if tmp[mid - i] == tmp[mid + i - 1]:
+                        i += 1
+                    else:
+                        res = False
+                        break
+            return res
+
+        return isPalindormeList()
 
 
 def from_list(values):
@@ -61,7 +87,9 @@ def test():
         actual = sol.isPalindrome(from_list(vals))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
