@@ -26,39 +26,53 @@ Link: https://leetcode.cn/problems/min-stack/
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
+from collections import deque
 from typing import List, Tuple, Any
 
 
 class MinStack:
     def __init__(self):
         # TODO: 初始化你的数据结构
-        pass
+        self.minval = float("inf")
+        self.stk = deque()
+        self.minstk = deque()
 
     def push(self, val: int) -> None:
         # TODO: 在这里写你的解法
-        pass
+        self.stk.append(val)
+        if val < self.minval:
+            self.minval = val
+        self.minstk.append(self.minval)
 
     def pop(self) -> None:
         # TODO: 在这里写你的解法
-        pass
+        if not self.stk:
+            return
+        self.minstk.pop()
+        if self.minstk:
+            self.minval = self.minstk[-1]
+        else:
+            self.minval = float("inf")
+        self.stk.pop()
 
     def top(self) -> int:
         # TODO: 在这里写你的解法
-        pass
+        return self.stk[-1]
 
     def getMin(self) -> int:
         # TODO: 在这里写你的解法
-        pass
+        if len(self.stk) > 0:
+            return self.minval
 
 
 def run_ops(ops: List[Tuple[str, Any]]) -> List[Any]:
     out: List[Any] = []
     obj = None
     for name, args in ops:
-        if name == 'init':
+        if name == "init":
             obj = MinStack()
             out.append(None)
-        elif name in ('push', 'pop'):
+        elif name in ("push", "pop"):
             getattr(obj, name)(*args)
             out.append(None)
         else:
@@ -69,22 +83,20 @@ def run_ops(ops: List[Tuple[str, Any]]) -> List[Any]:
 def test():
     cases = [
         (
-            [('init', ()),
-             ('push', (-2,)),
-             ('push', (0,)),
-             ('push', (-3,)),
-             ('getMin', ()),
-             ('pop', ()),
-             ('top', ()),
-             ('getMin', ())],
+            [
+                ("init", ()),
+                ("push", (-2,)),
+                ("push", (0,)),
+                ("push", (-3,)),
+                ("getMin", ()),
+                ("pop", ()),
+                ("top", ()),
+                ("getMin", ()),
+            ],
             [None, None, None, None, -3, None, 0, -2],
         ),
         (
-            [('init', ()),
-             ('push', (1,)),
-             ('push', (2,)),
-             ('top', ()),
-             ('getMin', ())],
+            [("init", ()), ("push", (1,)), ("push", (2,)), ("top", ()), ("getMin", ())],
             [None, None, None, 2, 1],
         ),
     ]

@@ -22,6 +22,7 @@ Link: https://leetcode.cn/problems/binary-tree-right-side-view/
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
+from collections import deque
 from typing import List, Optional
 
 
@@ -35,23 +36,42 @@ class TreeNode:
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        if not root:
+            return []
+        stk = deque()
+        stk.append(root)
+        res = []
+        while stk:
+            l = len(stk)
+            last = []
+            for _ in range(l):
+                tmp = stk.popleft()
+                if tmp.left:
+                    stk.append(tmp.left)
+                if tmp.right:
+                    stk.append(tmp.right)
+                last.append(tmp.val)
+            res.append(last[-1])
+        return res
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -70,7 +90,9 @@ def test():
         actual = sol.rightSideView(build_tree(vals))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

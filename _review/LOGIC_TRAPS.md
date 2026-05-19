@@ -295,6 +295,53 @@ Python 默认把 `x = ...` 当作"新建 Local"，外层 res 没被改。
 
 **修**：函数顶 `nonlocal res`。详见 [SHORTCUTS § 闭包替代 self.xxx](PYTHON_SHORTCUTS.md)。
 
+### C4. BST 验证：约束没传递到深层（只看父孙不够）
+
+BST 的定义**不是**"每个节点的左孩子小、右孩子大"——是**整个左子树所有节点 < 当前**，**整个右子树所有节点 > 当前**。
+
+错例（只查父子 + 父孙）：
+
+```python
+def isValidBST(self, root):
+    if not root: return True
+    if not (left.val < root.val < right.val): return False      # 只查直接孩子
+    if not (left.right.val < root.val < right.left.val): return False   # 只查孙
+    return isValidBST(left) and isValidBST(right)
+```
+
+**漏洞**：递归到 `left` 时，把"必须 < root"这个约束**丢了**——左子树深处可能出现 > root 的值不被发现。
+
+反例（深度 3 违规漏检）：
+
+```
+       10
+      /  \
+     5    15
+         /  \
+        12   20
+        /
+       6     ← 6 在 10 的右子树（违法），但只查父孙查不到
+```
+
+修法：**每层显式传递上下界**：
+
+```python
+def valid(node, lo, hi):
+    if not node: return True
+    if not (lo < node.val < hi): return False
+    return (valid(node.left, lo, node.val) and
+            valid(node.right, node.val, hi))
+return valid(root, float('-inf'), float('inf'))
+```
+
+**心法**：递归里**祖先约束**必须**显式传给后代**。"只看父孙"等价于丢弃祖先信息——树越深越漏。
+
+也可用中序升序判定（BST 中序 = 严格升序），同 [SHORTCUTS § 闭包 模式 C](PYTHON_SHORTCUTS.md)。
+
+错例：#0098 验证 BST 初版
+
+---
+
 ### C3. 把临时状态挂 `self.xxx`
 
 ```python
@@ -342,6 +389,36 @@ Python `for` 不是 C 的 `for(i++)`——序列由 range 决定，循环内改 
 想"跳跃前进"用 `while` 手动控制下标。
 
 **错例**：#0283 移动零 第一版 — for 循环里 `i += 1` 想跳过零，碰巧因为下轮 for 重置后还能匹配条件而跑对，但**逻辑绕**。
+
+---
+
+### P2. 数组找重复 + O(1) 空间 → 当链表用 Floyd 找环
+
+"数组里找重复值"的直觉是 **hashmap 或 set 计数**——O(n) 空间。题目限定 **O(1) 空间** 时这条死路。
+
+**抽象跳跃**：
+
+把 `nums[i]` 当作"指针"——下标 i 的"下一节点"是下标 `nums[i]`。整个数组等价于一个**链表**。
+
+```
+nums = [1, 3, 4, 2, 2]
+0 → 1 → 3 → 2 → 4 → 2 → 4 → ...  （从下标 2 起进入环）
+```
+
+由**抽屉原理**（n+1 个数 / 值都在 [1, n]）必有重复值——**重复值就是环入口的下标**，因为两个不同下标都指向那里。
+
+代码 = **0142 链表找环入口** 改 4 处字符：
+
+| 0142 | 0287 |
+|---|---|
+| `slow = head` | `slow = 0` |
+| `slow = slow.next` | `slow = nums[slow]` |
+| `fast = fast.next.next` | `fast = nums[nums[fast]]` |
+| 终止 `fast and fast.next` | 不需要（永远有环）|
+
+**触发器**：题面 = "**数组 + 值在 [1, n] + 找重复 + O(1) 空间**" → 数组当链表 + Floyd。
+
+错例：#0287 寻找重复数（卡壳：不会建模成链表）
 
 ---
 
