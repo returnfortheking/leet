@@ -30,7 +30,21 @@ from typing import List
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
         # TODO: 在这里写你的解法
-        pass
+        row = len(matrix)
+        col = len(matrix[0])
+
+        for mid2 in range(0, row):
+            l1 = 0
+            r1 = col - 1
+            while l1 <= r1:
+                mid1 = (l1 + r1) // 2
+                if matrix[mid2][mid1] == target:
+                    return True
+                elif matrix[mid2][mid1] > target:
+                    r1 = mid1 - 1
+                elif matrix[mid2][mid1] < target:
+                    l1 = mid1 + 1
+        return False
 
 
 def test():
@@ -43,10 +57,10 @@ def test():
         [18, 21, 23, 26, 30],
     ]
     cases = [
-        ((matrix, 5), True),
-        ((matrix, 20), False),
+        ((matrix, 6), True),
         ((matrix, 1), True),
         ((matrix, 30), True),
+        ((matrix, 20), False),
         ((matrix, 31), False),
         (([[1]], 1), True),
         (([[1]], 0), False),
@@ -57,7 +71,9 @@ def test():
         actual = sol.searchMatrix(m, args[1])
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: target={args[1]}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: target={args[1]}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

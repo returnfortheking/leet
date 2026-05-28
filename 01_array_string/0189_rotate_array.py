@@ -19,7 +19,7 @@ Link: https://leetcode.cn/problems/rotate-array/
 
 复盘要点（解完后填）
 --------
-- 卡在哪一步？
+- 三次翻转
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
@@ -30,7 +30,15 @@ class Solution:
     def rotate(self, nums: List[int], k: int) -> None:
         """原地修改 nums。"""
         # TODO: 在这里写你的解法
-        pass
+        n = len(nums)
+        k = k % n
+        if k == 0:
+            return
+        tmp = nums[-k:]
+        for i in range(n - k - 1, -1, -1):
+            nums[i + k] = nums[i]
+        for i in range(0, k):
+            nums[i] = tmp[i]
 
 
 def test():
@@ -49,7 +57,9 @@ def test():
         sol.rotate(nums_copy, k)
         ok = nums_copy == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r} k={k}  expected={expected!r}  actual={nums_copy!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r} k={k}  expected={expected!r}  actual={nums_copy!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
