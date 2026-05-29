@@ -34,7 +34,17 @@ class ListNode:
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+        while head and head.next:
+            tmp = head.next.next
+            prev.next = head.next
+            head.next.next = head
+            head.next = tmp
+            prev = head
+            head = tmp
+        return dummy.next
 
 
 def to_list(head):
@@ -68,7 +78,9 @@ def test():
         actual = to_list(sol.swapPairs(from_list(vals)))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

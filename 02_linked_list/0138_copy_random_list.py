@@ -27,7 +27,12 @@ from typing import List, Optional
 
 
 class Node:
-    def __init__(self, val: int = 0, nxt: 'Optional[Node]' = None, random: 'Optional[Node]' = None):
+    def __init__(
+        self,
+        val: int = 0,
+        nxt: "Optional[Node]" = None,
+        random: "Optional[Node]" = None,
+    ):
         self.val = val
         self.next = nxt
         self.random = random
@@ -36,7 +41,23 @@ class Node:
 class Solution:
     def copyRandomList(self, head: Optional[Node]) -> Optional[Node]:
         # TODO: 在这里写你的解法
-        pass
+        nodemap = {}
+        if not head:
+            return None
+        dummy = Node(0)
+        cur = head
+        while cur:
+            nodemap[cur] = Node(cur.val)
+            cur = cur.next
+        cur = head
+        dummy.next = nodemap[cur]
+        while cur:
+            if cur.next:
+                nodemap[cur].next = nodemap[cur.next]
+            if cur.random:
+                nodemap[cur].random = nodemap[cur.random]
+            cur = cur.next
+        return dummy.next
 
 
 def build(pairs):
@@ -68,7 +89,7 @@ def test():
         [(1, 1), (2, 1)],
         [(3, None), (3, 0), (3, None)],
         [],
-        [(1, 0)],            # random 自指
+        [(1, 0)],  # random 自指
     ]
     passed = 0
     for i, pairs in enumerate(cases, 1):
@@ -85,7 +106,9 @@ def test():
             a, b = a.next, b.next
         ok = ok_struct and ok_no_share
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: pairs={pairs!r}  expected={pairs!r}  actual={to_pairs(copy)!r}  no_share={ok_no_share}")
+        print(
+            f"[{status}] Case {i}: pairs={pairs!r}  expected={pairs!r}  actual={to_pairs(copy)!r}  no_share={ok_no_share}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
