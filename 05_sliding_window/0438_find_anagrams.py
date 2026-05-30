@@ -23,12 +23,63 @@ Link: https://leetcode.cn/problems/find-all-anagrams-in-a-string/
 """
 
 from typing import List
+from collections import Counter, defaultdict
 
 
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
-        # TODO: 在这里写你的解法
-        pass
+        m, n = len(p), len(s)
+        need = Counter(p)
+        window = Counter(s[:m])
+        ans = []
+        if need == window:
+            ans.append(0)
+        for i in range(0, n - m):
+            window[s[i]] -= 1
+            if window[s[i]] == 0:
+                del window[s[i]]
+            window[s[i + m]] += 1
+            if need == window:
+                ans.append(i + 1)
+        return ans
+
+    def findAnagrams2(self, s: str, p: str) -> List[int]:
+
+        lenP = len(p)
+        lenS = len(s)
+        if lenS < lenP:
+            return []
+        ans = []
+        mapS = defaultdict(int)
+        mapP = defaultdict(int)
+        for i in range(lenP):
+            mapP[p[i]] += 1
+        for i in range(lenP):
+            mapS[s[i]] += 1
+
+        def equa(a, b) -> bool:
+            for k in b:
+                if a[k] != b[k]:
+                    return False
+            for k in a:
+                if a[k] != b[k]:
+                    return False
+            return True
+
+        l = 0
+        r = lenP - 1
+        while r < lenS:
+            if equa(mapS, mapP):
+                ans.append(l)
+            if mapS[s[l]] > 1:
+                mapS[s[l]] -= 1
+            else:
+                mapS.pop(s[l])
+            l += 1
+            r += 1
+            if r < lenS:
+                mapS[s[r]] += 1
+        return ans
 
 
 def test():
@@ -45,7 +96,9 @@ def test():
         actual = sol.findAnagrams(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

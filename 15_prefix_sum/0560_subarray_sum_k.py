@@ -23,12 +23,25 @@ Link: https://leetcode.cn/problems/subarray-sum-equals-k/
 """
 
 from typing import List
+from collections import defaultdict
 
 
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         # TODO: 在这里写你的解法
-        pass
+        mapping = defaultdict(int)
+        sum = [0] * (len(nums) + 1)
+        ans = 0
+        for i, num in enumerate(nums):
+            sum[i + 1] = sum[i] + num
+            mapping[sum[i + 1]] += 1
+        for i in range(0, len(nums)):
+            if i > 0:
+                mapping[sum[i]] -= 1
+            if mapping[k + sum[i]] > 0:
+                ans += mapping[k + sum[i]]
+
+        return ans
 
 
 def test():
@@ -46,7 +59,9 @@ def test():
         actual = sol.subarraySum(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
