@@ -369,6 +369,38 @@ bool([])       # False
 
 ---
 
+## defaultdict() 忘传工厂函数 = 普通 dict
+
+**症状**：`KeyError`——以为用了 defaultdict 就能自动默认值，结果访问缺失 key 还是抛异常。
+**根因**：`defaultdict()` **不传工厂函数**等于退化成普通 dict。必须传一个**可调用对象**当工厂。
+
+```python
+from collections import defaultdict
+
+mapping = defaultdict()         # ❌ 等于 {}，访问缺失 key 仍 KeyError
+mapping = defaultdict(int)      # ✅ 缺失 key 自动 int() == 0
+mapping = defaultdict(list)     # ✅ 缺失 key 自动 [] —— 分组用
+mapping = defaultdict(set)      # ✅ 缺失 key 自动 set()
+```
+
+工厂函数是"**缺 key 时调用它生成默认值**"：`int()→0`、`list()→[]`、`set()→set()`。
+
+**纯计数别手搓 defaultdict，直接 Counter**：
+
+```python
+# ❌ 啰嗦
+cnt = defaultdict(int)
+for x in nums: cnt[x] += 1
+
+# ✅ 一行
+from collections import Counter
+cnt = Counter(nums)
+```
+
+首次出现：#0347
+
+---
+
 ## 待累积 (新增题时把根因抄到这里)
 
 按主题预留：

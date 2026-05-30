@@ -23,12 +23,27 @@ Link: https://leetcode.cn/problems/partition-labels/
 """
 
 from typing import List
+from collections import defaultdict
 
 
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        mapping = [-1] * 26
+        ans = []
+        for i in range(len(s)):
+            mapping[ord(s[i]) - ord("a")] = max(mapping[ord(s[i]) - ord("a")], i)
+        i = 0
+        while i < len(s):
+            r = mapping[ord(s[i]) - ord("a")]
+            if r > i:
+                j = i + 1
+                while j < r:
+                    r = max(r, mapping[ord(s[j]) - ord("a")])
+                    j += 1
+            ans.append(r - i + 1)
+            i = r + 1
+        return ans
 
 
 def test():

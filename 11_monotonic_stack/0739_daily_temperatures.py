@@ -23,12 +23,20 @@ Link: https://leetcode.cn/problems/daily-temperatures/
 """
 
 from typing import List
+from collections import deque
 
 
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        d = deque()
+        ans = [0] * len(temperatures)
+        for i, t in enumerate(temperatures):
+            while d and d[-1][0] < t:
+                _, pos = d.pop()
+                ans[pos] = i - pos
+            d.append((t, i))
+        return ans
 
 
 def test():
@@ -39,13 +47,18 @@ def test():
         ([30, 60, 90], [1, 1, 0]),
         ([90, 80, 70], [0, 0, 0]),
         ([42], [0]),
+        # ★ 相邻相等 + 后面有更暖：区分 < 和 <=（用 <= 会让下标 4 算成 1）
+        ([89, 62, 70, 58, 47, 47, 46, 76, 100, 70], [8, 1, 5, 4, 3, 2, 1, 1, 0, 0]),
+        ([73, 73, 74], [2, 1, 0]),  # 最小相邻相等反例
     ]
     passed = 0
     for i, (nums, expected) in enumerate(cases, 1):
         actual = sol.dailyTemperatures(nums)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

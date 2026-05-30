@@ -509,6 +509,63 @@ d = {}
 d[k] = d.get(k, 0) + 1
 ```
 
+**⚠ 工厂函数必传**：`defaultdict()` 不传参 = 退化成普通 dict（缺 key 仍 KeyError）。详见 [pitfalls](pitfalls.md)。
+
+---
+
+## ★ Counter — 计数 / 频次的瑞士军刀
+
+纯计数别手搓 `defaultdict(int)` + 循环，直接 Counter：
+
+```python
+from collections import Counter
+
+# 一行计数
+cnt = Counter(nums)              # {1: 3, 2: 2, 3: 1}
+cnt = Counter("aabbbc")         # {'b': 3, 'a': 2, 'c': 1}
+
+cnt[x]                          # 取频次；缺失返 0（不抛 KeyError）
+cnt.most_common(k)              # ★ 前 k 高频 [(elem, count), ...] 降序
+cnt.most_common()               # 全部，按频次降序
+
+# TopK 高频元素：most_common 直接出（0347 最简解）
+[x for x, c in Counter(nums).most_common(k)]
+```
+
+**0347 前 K 高频** 三种写法，从简到通用：
+
+```python
+# 写法 1：most_common 一行（最简）
+return [x for x, _ in Counter(nums).most_common(k)]
+
+# 写法 2：堆维护大小 k（数据流 / 强调 O(n log k) 时）
+cnt = Counter(nums)
+h = []
+for num, freq in cnt.items():
+    heapq.heappush(h, (freq, num))    # 正频次 + 小顶堆
+    if len(h) > k:
+        heapq.heappop(h)              # 弹最小频次，留 top k
+return [num for freq, num in h]
+```
+
+## ★ 遍历 dict 的 Pythonic 姿势
+
+```python
+for k in d: ...                 # 只遍历 key（默认）
+for k, v in d.items(): ...      # ★ 同时拿 key + value（最常用）
+for v in d.values(): ...        # 只遍历 value
+
+# 计数场景常见
+for num, freq in cnt.items():   # 一次解包，别写 for num in cnt: ... cnt[num]
+    ...
+```
+
+**反模式**：`for k in d: use d[k]` —— 多一次哈希查找，且啰嗦。用 `.items()` 一次解包。
+
+**⚠ 循环变量别撞参数名**：`def topK(nums, k): for k in mapping:` —— 循环变量 `k` 把参数 `k` 冲掉了（[pitfalls § 变量名遮蔽](pitfalls.md)）。计数遍历用 `for num, freq in ...`，别用单字母撞参数。
+
+首次出现：#0347
+
 ---
 
 ## 多重解包

@@ -25,12 +25,22 @@ Link: https://leetcode.cn/problems/top-k-frequent-elements/
 """
 
 from typing import List
+from collections import defaultdict
+import heapq
 
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         # TODO: 在这里写你的解法
-        pass
+        mapping = defaultdict(int)
+        for num in nums:
+            mapping[num] += 1
+        h = []
+        for key in mapping:
+            heapq.heappush(h, (mapping[key], key))
+            if len(h) > k:
+                heapq.heappop(h)
+        return [num for freq, num in h]
 
 
 def test():
@@ -46,7 +56,9 @@ def test():
         actual = sol.topKFrequent(*args)
         ok = actual is not None and sorted(actual) == sorted(expected)
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -21,10 +21,19 @@ Link: https://leetcode.cn/problems/kth-largest-element-in-an-array/
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
+import heapq
 from typing import List
 
 
 class Solution:
+    def findKthLargest2(self, nums: List[int], k: int) -> int:
+        # TODO: 在这里写你的解法
+        h = list([-x for x in nums])
+        heapq.heapify(h)
+        for _ in range(k - 1):
+            heapq.heappop(h)
+        return -h[0]
+
     def findKthLargest(self, nums: List[int], k: int) -> int:
         # TODO: 在这里写你的解法
         pass
@@ -44,7 +53,9 @@ def test():
         actual = sol.findKthLargest(*args)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: args={args!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
