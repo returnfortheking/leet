@@ -36,23 +36,48 @@ class TreeNode:
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        m = {}
+        ans = root.val
+
+        def maxSingle(root: Optional[TreeNode]) -> int:
+            if not root:
+                return 0
+            nonlocal ans
+            l = r = 0
+            if root.left in m:
+                l = max(0, m[root.left])
+            else:
+                l = max(0, maxSingle(root.left))
+            if root.right in m:
+                r = max(0, m[root.right])
+            else:
+                r = max(0, maxSingle(root.right))
+            s = root.val + max(l, r)
+            m[root] = s
+            ans = max(ans, l + r + root.val)
+            return s
+
+        maxSingle(root)
+        return ans
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -60,6 +85,7 @@ def build_tree(vals):
 def test():
     sol = Solution()
     cases = [
+        ([5, 4, 8, 11, None, 13, 4, 7, 2, None, None, None, 1], 48),
         ([1, 2, 3], 6),
         ([-10, 9, 20, None, None, 15, 7], 42),
         ([-3], -3),
@@ -72,7 +98,9 @@ def test():
         actual = sol.maxPathSum(build_tree(vals))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: tree={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

@@ -24,6 +24,7 @@ LCA 定义：在二叉树中同时拥有 p 和 q 作为后代的最深节点（�
 - 触发器：什么样的题面应该让我立刻想到这个套路？
 """
 
+from collections import deque
 from typing import List, Optional
 
 
@@ -35,25 +36,38 @@ class TreeNode:
 
 
 class Solution:
-    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+    def lowestCommonAncestor(
+        self, root: "TreeNode", p: "TreeNode", q: "TreeNode"
+    ) -> "TreeNode":
         # TODO: 在这里写你的解法
-        pass
+        if not root:
+            return None
+        if root == p or root == q:
+            return root
+        l = self.lowestCommonAncestor(root.left, p, q)
+        r = self.lowestCommonAncestor(root.right, p, q)
+        if l and r:
+            return root
+        return l or r
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -78,12 +92,15 @@ def test():
     passed = 0
     for i, (vals, pv, qv, expected) in enumerate(cases, 1):
         root = build_tree(vals)
-        p = find(root, pv); q = find(root, qv)
+        p = find(root, pv)
+        q = find(root, qv)
         ans = sol.lowestCommonAncestor(root, p, q)
         actual = ans.val if ans else None
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: p={pv} q={qv}  expected={expected}  actual={actual}")
+        print(
+            f"[{status}] Case {i}: p={pv} q={qv}  expected={expected}  actual={actual}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

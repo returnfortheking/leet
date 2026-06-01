@@ -36,24 +36,46 @@ class TreeNode:
 class Solution:
     def flatten(self, root: Optional[TreeNode]) -> None:
         """原地修改 root 为前序展开的"链表"。"""
+        cur = root
+
         # TODO: 在这里写你的解法
-        pass
+        def travel(head: Optional[TreeNode]) -> None:
+            nonlocal cur
+            if not head:
+                return
+            l = head.left
+            r = head.right
+            if l:
+                cur.left = None
+                cur.right = l
+                cur = cur.right
+            travel(l)
+            if r:
+                cur.left = None
+                cur.right = r
+                cur = cur.right
+            travel(r)
+
+        travel(root)
 
 
 def build_tree(vals):
     if not vals:
         return None
     from collections import deque
+
     root = TreeNode(vals[0])
     q = deque([root])
     i = 1
     while q and i < len(vals):
         node = q.popleft()
         if i < len(vals) and vals[i] is not None:
-            node.left = TreeNode(vals[i]); q.append(node.left)
+            node.left = TreeNode(vals[i])
+            q.append(node.left)
         i += 1
         if i < len(vals) and vals[i] is not None:
-            node.right = TreeNode(vals[i]); q.append(node.right)
+            node.right = TreeNode(vals[i])
+            q.append(node.right)
         i += 1
     return root
 
@@ -63,7 +85,7 @@ def to_right_chain(root):
     out, node = [], root
     while node:
         if node.left is not None:
-            return None         # 不合规
+            return None  # 不合规
         out.append(node.val)
         node = node.right
     return out
@@ -85,7 +107,9 @@ def test():
         actual = to_right_chain(root) if root else []
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
