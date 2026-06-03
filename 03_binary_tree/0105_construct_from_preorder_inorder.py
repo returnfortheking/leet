@@ -35,13 +35,33 @@ class TreeNode:
 
 class Solution:
     def buildTree(self, preorder: List[int], inorder: List[int]) -> Optional[TreeNode]:
-        # TODO: 在这里写你的解法
-        pass
+        inmap = {}
+        for i, num in enumerate(inorder):
+            inmap[num] = i
+
+        def build(prePos: int, in_l: int, in_r: int) -> Optional[TreeNode]:
+            if prePos >= len(inorder):
+                return None
+            root = TreeNode(preorder[prePos])
+            if in_l == in_r:
+                return root
+            if in_l > in_r:
+                return None
+            in_p = inmap[preorder[prePos]]
+            left_size = in_p - in_l
+            root.left = build(prePos + 1, in_l, in_p - 1)
+            root.right = build(prePos + 1 + left_size, in_p + 1, in_r)
+            return root
+
+        root = build(0, 0, len(inorder) - 1)
+        return root
 
 
 def to_levels(root):
-    if not root: return []
+    if not root:
+        return []
     from collections import deque
+
     out, q = [], deque([root])
     while q:
         node = q.popleft()
@@ -49,7 +69,8 @@ def to_levels(root):
             out.append(None)
         else:
             out.append(node.val)
-            q.append(node.left); q.append(node.right)
+            q.append(node.left)
+            q.append(node.right)
     while out and out[-1] is None:
         out.pop()
     return out
@@ -58,17 +79,19 @@ def to_levels(root):
 def test():
     sol = Solution()
     cases = [
+        (([1, 2], [1, 2]), [1, None, 2]),
         (([3, 9, 20, 15, 7], [9, 3, 15, 20, 7]), [3, 9, 20, None, None, 15, 7]),
         (([-1], [-1]), [-1]),
         (([1, 2], [2, 1]), [1, 2]),
-        (([1, 2], [1, 2]), [1, None, 2]),
     ]
     passed = 0
     for i, ((pre, ino), expected) in enumerate(cases, 1):
         actual = to_levels(sol.buildTree(pre, ino))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: pre={pre!r} in={ino!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: pre={pre!r} in={ino!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

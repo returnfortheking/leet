@@ -34,6 +34,17 @@ class ListNode:
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
+        
+        def sortTwoList(h1:Optional[ListNode], h2:Optional[ListNode])->Optional[ListNode]:
+            if not h1 and not h2:
+                return None
+            ans = ListNode(0)
+            cur = ans.next
+            while h1 and h2:
+                if h1.val > h2.val:
+
+            
+
         pass
 
 
