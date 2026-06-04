@@ -28,8 +28,29 @@ from typing import List
 
 class Solution:
     def jump(self, nums: List[int]) -> int:
+        cur = 0
+        nxt = 0
+        steps = 0
+        for i in range(len(nums) - 1):
+            if i + nums[i] > nxt:
+                nxt = i + nums[i]
+            if i == cur:
+                steps += 1
+                cur = nxt
+        return steps
+
+    def jump2(self, nums: List[int]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        dp = [100000] * len(nums)
+        dp[0] = 0
+        maxpos = 0
+        for i, num in enumerate(nums):
+            if i + nums[i] > maxpos:
+                maxpos = i + nums[i]
+                for j in range(1, nums[i] + 1):
+                    if i + j < len(nums):
+                        dp[i + j] = min(dp[i + j], dp[i] + 1)
+        return dp[len(nums) - 1]
 
 
 def test():
@@ -46,7 +67,9 @@ def test():
         actual = sol.jump(nums)
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

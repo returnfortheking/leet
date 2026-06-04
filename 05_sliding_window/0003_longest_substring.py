@@ -22,12 +22,33 @@ Link: https://leetcode.cn/problems/longest-substring-without-repeating-character
 """
 
 from typing import List
+from collections import defaultdict
 
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
         # TODO: 在这里写你的解法
-        pass
+        letters = defaultdict(int)
+        l = r = 0
+        ans = 0
+
+        def isRepeated() -> bool:
+            for n in letters.values():
+                if n > 1:
+                    return True
+            return False
+
+        while r < len(s):
+            while r < len(s) and not isRepeated():
+                ans = max(r - l, ans)
+                letters[s[r]] += 1
+                r += 1
+            while l < r and isRepeated():
+                letters[s[l]] -= 1
+                l += 1
+        if not isRepeated():
+            ans = max(r - l, ans)
+        return ans
 
 
 def test():

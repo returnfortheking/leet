@@ -28,7 +28,27 @@ from typing import List
 class Solution:
     def threeSum(self, nums: List[int]) -> List[List[int]]:
         # TODO: 在这里写你的解法
-        pass
+        if not nums:
+            return []
+        n = len(nums)
+        nums.sort()
+        ans = []
+        m = set()
+        for i in range(n):
+            j = i + 1
+            k = n - 1
+            while j < k:
+                if nums[i] + nums[j] + nums[k] == 0:
+                    m.add((nums[i], nums[j], nums[k]))
+                    j += 1
+                    continue
+                elif nums[i] + nums[j] + nums[k] < 0:
+                    j += 1
+                elif nums[i] + nums[j] + nums[k] > 0:
+                    k -= 1
+        for k in m:
+            ans.append(list(k))
+        return ans
 
 
 def test():
@@ -46,7 +66,9 @@ def test():
         # 答案顺序无关，比较时排序
         ok = actual is not None and sorted(actual) == sorted(expected)
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: nums={nums!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
