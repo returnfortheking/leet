@@ -26,7 +26,7 @@ from typing import List
 
 
 class Solution:
-    def findKthLargest2(self, nums: List[int], k: int) -> int:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
         # TODO: 在这里写你的解法
         h = list([-x for x in nums])
         heapq.heapify(h)
@@ -34,7 +34,7 @@ class Solution:
             heapq.heappop(h)
         return -h[0]
 
-    def findKthLargest(self, nums: List[int], k: int) -> int:
+    def findKthLargest2(self, nums: List[int], k: int) -> int:
         # TODO: 在这里写你的解法
         pass
 

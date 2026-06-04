@@ -34,18 +34,41 @@ class ListNode:
 class Solution:
     def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        
-        def sortTwoList(h1:Optional[ListNode], h2:Optional[ListNode])->Optional[ListNode]:
+        if not head or not head.next:
+            return head
+
+        def mergeSortedList(
+            h1: Optional[ListNode], h2: Optional[ListNode]
+        ) -> Optional[ListNode]:
             if not h1 and not h2:
                 return None
             ans = ListNode(0)
-            cur = ans.next
+            cur = ans
             while h1 and h2:
                 if h1.val > h2.val:
+                    cur.next = h2
+                    h2 = h2.next
+                    cur = cur.next
+                else:
+                    cur.next = h1
+                    h1 = h1.next
+                    cur = cur.next
+            cur.next = h1 or h2
+            return ans.next
 
-            
+        def findMid(root: Optional[ListNode]) -> Optional[ListNode]:
+            slow = fast = root
+            while fast.next and fast.next.next:
+                slow = slow.next
+                fast = fast.next.next
+            tmp = slow.next
+            slow.next = None
+            return tmp
 
-        pass
+        mid = findMid(head)
+        l = self.sortList(head)
+        r = self.sortList(mid)
+        return mergeSortedList(l, r)
 
 
 def to_list(head):
@@ -80,7 +103,9 @@ def test():
         actual = to_list(sol.sortList(from_list(vals)))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

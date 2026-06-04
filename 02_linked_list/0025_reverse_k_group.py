@@ -36,7 +36,39 @@ class ListNode:
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+        dummy = ListNode(0)
+        dummy.next = head
+        prev = dummy
+
+        def reverseK(
+            head: Optional[ListNode],
+        ) -> tuple[Optional[ListNode], Optional[ListNode]]:
+            hair = ListNode(0)
+            tail = head
+            while head:
+                tmp = hair.next
+                hair.next = head
+                head = head.next
+                hair.next.next = tmp
+            return (hair.next, tail)
+
+        while head:
+            cur = head
+            cnt = 1
+            while cur and cnt < k:
+                cur = cur.next
+                cnt += 1
+            if cnt < k or (not cur):
+                return dummy.next
+            else:
+                tmp = cur.next
+                cur.next = None
+                prev.next, tail = reverseK(prev.next)
+                tail.next = tmp
+                head = tmp
+                prev = tail
+
+        return dummy.next
 
 
 def to_list(head):
@@ -71,7 +103,9 @@ def test():
         actual = to_list(sol.reverseKGroup(from_list(vals), k))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: vals={vals!r} k={k}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: vals={vals!r} k={k}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")

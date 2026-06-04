@@ -38,7 +38,37 @@ class ListNode:
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         # TODO: 在这里写你的解法
-        pass
+
+        def mergeSortedList(
+            h1: Optional[ListNode], h2: Optional[ListNode]
+        ) -> Optional[ListNode]:
+            if not h1 and not h2:
+                return None
+            ans = ListNode(0)
+            cur = ans
+            while h1 and h2:
+                if h1.val > h2.val:
+                    cur.next = h2
+                    h2 = h2.next
+                    cur = cur.next
+                else:
+                    cur.next = h1
+                    h1 = h1.next
+                    cur = cur.next
+            cur.next = h1 or h2
+            return ans.next
+
+        def mergeK(l: int, r: int) -> Optional[ListNode]:
+            if l > r:
+                return None
+            if l == r:
+                return lists[l]
+            mid = (l + r) // 2
+            h1 = mergeK(l, mid)
+            h2 = mergeK(mid + 1, r)
+            return mergeSortedList(h1, h2)
+
+        return mergeK(0, len(lists) - 1)
 
 
 def to_list(head):
@@ -73,7 +103,9 @@ def test():
         actual = to_list(sol.mergeKLists(lists))
         ok = actual == expected
         status = "PASS" if ok else "FAIL"
-        print(f"[{status}] Case {i}: lists={lists_vals!r}  expected={expected!r}  actual={actual!r}")
+        print(
+            f"[{status}] Case {i}: lists={lists_vals!r}  expected={expected!r}  actual={actual!r}"
+        )
         if ok:
             passed += 1
     print(f"\n{passed}/{len(cases)} passed")
