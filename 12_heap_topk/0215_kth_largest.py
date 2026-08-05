@@ -34,10 +34,6 @@ class Solution:
             heapq.heappop(h)
         return -h[0]
 
-    def findKthLargest2(self, nums: List[int], k: int) -> int:
-        # TODO: 在这里写你的解法
-        pass
-
 
 def test():
     sol = Solution()

@@ -29,7 +29,27 @@ from typing import List
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         # TODO: 在这里写你的解法
-        pass
+        dir = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+        m = len(grid)
+        n = len(grid[0])
+        i = j = 0
+        ans = 0
+
+        def bfs(i: int, j: int, len: int):
+            if grid[i][j] == 0:
+                return
+            elif grid[i][j] == 1:
+                grid[i][j] = 2
+            elif grid[i][j] == 2:
+                return
+            for k, l in dir:
+                bfs(k + i, l + j, len + 1)
+
+        while 0 <= i < m and 0 <= j < n:
+            if grid[i][j] == 2:
+                bfs(i, j, 0)
+
+        return 0
 
 
 def test():

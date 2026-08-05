@@ -1,0 +1,147 @@
+{
+  "created": "2026-07-15T08:33:54",
+  "tiers": [
+    "T2",
+    "T3"
+  ],
+  "problems": [
+    {
+      "num": 763,
+      "name": "划分字母区间",
+      "path": "10_greedy/0763_partition_labels.py",
+      "tier": "T3",
+      "topic": "10_greedy",
+      "status": "skipped",
+      "start": 1784129648.1406667,
+      "elapsed_min": 21.0,
+      "fails": 1,
+      "file": "_retest\\01_0763_partition_labels.py"
+    },
+    {
+      "num": 287,
+      "name": "寻找重复数",
+      "path": "02_linked_list/0287_find_duplicate_number.py",
+      "tier": "T3",
+      "topic": "02_linked_list",
+      "status": "skipped",
+      "start": 1784130910.5080273,
+      "elapsed_min": 23.9,
+      "fails": 6,
+      "file": "_retest\\02_0287_find_duplicate_number.py"
+    },
+    {
+      "num": 199,
+      "name": "二叉树右视图",
+      "path": "03_binary_tree/0199_right_side_view.py",
+      "tier": "T3",
+      "topic": "03_binary_tree",
+      "status": "passed",
+      "start": 1784132347.4231882,
+      "elapsed_min": 5.2,
+      "fails": 2,
+      "file": "_retest\\03_0199_right_side_view.py"
+    },
+    {
+      "num": 20,
+      "name": "有效的括号",
+      "path": "11_monotonic_stack/0020_valid_parentheses.py",
+      "tier": "T2",
+      "topic": "11_monotonic_stack",
+      "status": "passed",
+      "start": 1784132661.6634707,
+      "elapsed_min": 8.3,
+      "fails": 2,
+      "file": "_retest\\04_0020_valid_parentheses.py"
+    },
+    {
+      "num": 75,
+      "name": "颜色分类",
+      "path": "04_two_pointers/0075_sort_colors.py",
+      "tier": "T3",
+      "topic": "04_two_pointers",
+      "status": "passed",
+      "start": 1784133158.2098527,
+      "elapsed_min": 13.6,
+      "fails": 6,
+      "file": "_retest\\05_0075_sort_colors.py"
+    },
+    {
+      "num": 198,
+      "name": "打家劫舍",
+      "path": "09_dp/0198_house_robber.py",
+      "tier": "T2",
+      "topic": "09_dp",
+      "status": "passed",
+      "start": 1784133976.0866559,
+      "elapsed_min": 6.5,
+      "fails": 0,
+      "file": "_retest\\06_0198_house_robber.py"
+    },
+    {
+      "num": 49,
+      "name": "字母异位词分组",
+      "path": "01_array_string/0049_group_anagrams.py",
+      "tier": "T3",
+      "topic": "01_array_string",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    },
+    {
+      "num": 560,
+      "name": "和为 K 的子数组",
+      "path": "15_prefix_sum/0560_subarray_sum_k.py",
+      "tier": "T3",
+      "topic": "15_prefix_sum",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    },
+    {
+      "num": 153,
+      "name": "寻找旋转数组最小值",
+      "path": "06_binary_search/0153_find_min_in_rotated.py",
+      "tier": "T3",
+      "topic": "06_binary_search",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    },
+    {
+      "num": 39,
+      "name": "组合总和",
+      "path": "08_backtracking/0039_combination_sum.py",
+      "tier": "T3",
+      "topic": "08_backtracking",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    },
+    {
+      "num": 438,
+      "name": "找到字符串中所有字母异位词",
+      "path": "05_sliding_window/0438_find_anagrams.py",
+      "tier": "T3",
+      "topic": "05_sliding_window",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    },
+    {
+      "num": 347,
+      "name": "前 K 高频元素",
+      "path": "12_heap_topk/0347_top_k_frequent.py",
+      "tier": "T3",
+      "topic": "12_heap_topk",
+      "status": "pending",
+      "start": null,
+      "elapsed_min": null,
+      "fails": 0
+    }
+  ]
+}
